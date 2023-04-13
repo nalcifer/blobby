@@ -1,18 +1,16 @@
 import pygame
-import math
+# import math
 # from randomGeneration import *
 from asset import *
+from classes.background import *
+from config import *
 
 pygame.init()
 
 clock = pygame.time.Clock()
 FPS = 60
 
-#create game window
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 432
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 #define game variables
 scroll = 0
@@ -27,16 +25,17 @@ bg_image = pygame.image.load("img/bg.png").convert_alpha()
 bg_width = bg_image.get_width()
 bg_height = bg_image.get_height()
 
+background = Background(posX=0, posY=0, speed=0, img=bg_image)
 
-# fonction qui défini le background 
-def drawBg():
-  for x in range(15):
-    screen.blit(bg_image, ((x * bg_width) - scroll * 2.5, SCREEN_HEIGHT - bg_height))
+# # fonction qui défini le background 
+# def drawBg():
+#   for x in range(15):
+#     screen.blit(bg_image, ((x * bg_width) - scroll * 2.5, SCREEN_HEIGHT - bg_height))
     
-# fonction qui dessine le sol
-def drawGround():
-  for x in range(15):
-    screen.blit(ground_image, ((x * ground_width) - scroll * 2.5, SCREEN_HEIGHT - ground_height))
+# # fonction qui dessine le sol
+# def drawGround():
+#   for x in range(15):
+#     screen.blit(ground_image, ((x * ground_width) - scroll * 2.5, SCREEN_HEIGHT - ground_height))
 
 # position de player
 playerPosX = 200
@@ -57,13 +56,13 @@ while run:
 
   clock.tick(FPS)
 
-  #draw world
-  drawBg()
-  drawGround()
+  # #draw world
+  # drawBg()
+  # drawGround()
   drawPlayer()
 
-  # inifinite background (of poor)
-  scroll += 3
+  # # inifinite background (of poor)
+  # scroll += 3
   
   colliderTree = drawTree(screen, scroll)
   colliderPlayer = drawPlayer()
