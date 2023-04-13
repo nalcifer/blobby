@@ -1,1 +1,2 @@
 # blobby
+projet mini studio
