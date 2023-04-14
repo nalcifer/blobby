@@ -22,10 +22,14 @@ ground_height = ground_image.get_height()
 
 
 bg_image = pygame.image.load("img/bg.png").convert_alpha()
+bg_image = pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
+# bg_image = pygame.transform.scale_by(pygame.image.load("img/bg.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
+
 bg_width = bg_image.get_width()
 bg_height = bg_image.get_height()
 
-background = Background(posX=0, posY=0, speed=0, img=bg_image)
+background = Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, speed=0)
+background.drawBg()
 
 # # fonction qui défini le background 
 # def drawBg():
