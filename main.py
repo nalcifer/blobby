@@ -11,26 +11,15 @@ clock = pygame.time.Clock()
 FPS = 60
 
 
-
 #define game variables
 scroll = 0
 
-ground_image = pygame.image.load("img/ground.png").convert_alpha()
-ground_width = ground_image.get_width()
-ground_height = ground_image.get_height()
 
 
-
-bg_image = pygame.image.load("img/bg.png").convert_alpha()
-bg_image = pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
+background = Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 3)
 # bg_image = pygame.transform.scale_by(pygame.image.load("img/bg.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-bg_width = bg_image.get_width()
-bg_height = bg_image.get_height()
-
-background = Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, speed=0)
 background.drawBg()
-
 # # fonction qui défini le background 
 # def drawBg():
 #   for x in range(15):
