@@ -15,7 +15,6 @@ FPS = 60
 scroll = 0
 
 
-
 background = Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 3)
 # bg_image = pygame.transform.scale_by(pygame.image.load("img/bg.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
 

@@ -12,5 +12,3 @@ class Background :
     def drawBg(self) :
         screen.blit(self.img,(self.posX, self.posY))
 
-    def drawBg(self):
-        screen.blit(self.img, (self.posX, self.posY))
