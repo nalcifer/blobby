@@ -1,4 +1,4 @@
-import pygame
+import pygame, time
 # import math
 # from randomGeneration import *
 from asset import *
@@ -8,26 +8,20 @@ from config import *
 pygame.init()
 
 clock = pygame.time.Clock()
-FPS = 60
+FPS = 300
+prev_time = time.time()
 
 
 #define game variables
 scroll = 0
 
 
-background = Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 3)
+background = Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 50)
 # bg_image = pygame.transform.scale_by(pygame.image.load("img/bg.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-background.drawBg()
-# # fonction qui défini le background 
-# def drawBg():
-#   for x in range(15):
-#     screen.blit(bg_image, ((x * bg_width) - scroll * 2.5, SCREEN_HEIGHT - bg_height))
-    
-# # fonction qui dessine le sol
-# def drawGround():
-#   for x in range(15):
-#     screen.blit(ground_image, ((x * ground_width) - scroll * 2.5, SCREEN_HEIGHT - ground_height))
+# # background draw
+# background.drawBg()
+
 
 # position de player
 playerPosX = 200
@@ -47,15 +41,17 @@ run = True
 while run:
 
   clock.tick(FPS)
-
-  # #draw world
-  # drawBg()
-  # drawGround()
+  now = time.time()
+  deltaTime = now - prev_time
+  print(deltaTime)
+  prev_time = now
   drawPlayer()
 
-  # # inifinite background (of poor)
-  # scroll += 3
-  
+  # background scroll
+  background.update(deltaTime)
+
+
+
   colliderTree = drawTree(screen, scroll)
   colliderPlayer = drawPlayer()
   if pygame.Rect.colliderect(colliderTree, colliderPlayer) == True:

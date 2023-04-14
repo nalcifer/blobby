@@ -9,7 +9,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 # ------- LOAD IMG --------
 # background
-bg_image = pygame.image.load("img/bg.png")
+bg_image = pygame.image.load("img/bg.png").convert_alpha()
 bg_width = bg_image.get_width()
 bg_height = bg_image.get_height()
 bg_ratio = bg_width/bg_height
