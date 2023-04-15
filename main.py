@@ -46,6 +46,7 @@ while run:
   
   background.update(deltaTime)
   
+  
   ground.generateObject()
   tree.generateObject()
   ground.update(deltaTime)
