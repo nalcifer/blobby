@@ -28,21 +28,3 @@ class Background :
 
 
 
-# 50 * 3 -> 150
-
-
-
-    # def update(self, deltaTime) : 
-    #     self.translateX = (( self.translateX + 1 ) * self.speed * deltaTime) % (SCREEN_HEIGHT * bg_ratio)
-    #     print(self.translateX)
-    #     nbr_img = round(( SCREEN_WIDTH * 2 ) / bg_width) + 1
-        
-    #     for i in range(1):
-            
-    #         self.posX = 0
-            
-    #         screen.blit( self.img, ( self.posX + (i * SCREEN_HEIGHT * bg_ratio ) - self.translateX, self.posY ) )
-    #         # print( self.posX + (i * SCREEN_HEIGHT * bg_ratio ) - self.translateX )
-            
-
-            

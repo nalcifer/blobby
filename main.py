@@ -1,9 +1,8 @@
 import pygame, time
-# import math
-# from randomGeneration import *
 from asset import *
 from classes.background import *
 from config import *
+from classes.fixedObject import *
 
 pygame.init()
 
@@ -14,14 +13,16 @@ prev_time = time.time()
 
 #define game variables
 scroll = 0
-
-
-background = Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 50)
+background = Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 100)
 # bg_image = pygame.transform.scale_by(pygame.image.load("img/bg.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-# # background draw
-# background.drawBg()
 
+tree = FixedObject(tree_image, 0, 0, 0, 0)
+
+# background draw
+background.drawBg()
+# draw tree
+tree.drawObject()
 
 # position de player
 playerPosX = 200
@@ -40,15 +41,18 @@ drawTree(screen, scroll)
 run = True
 while run:
 
+  # gère les fps 
   clock.tick(FPS)
+  # gère le delta time
   now = time.time()
   deltaTime = now - prev_time
-  print(deltaTime)
   prev_time = now
+
+  # affiche le joueur
   drawPlayer()
 
   # background scroll
-  background.update(deltaTime)
+  # background.update(deltaTime)
 
 
 
