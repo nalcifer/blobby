@@ -3,10 +3,14 @@ from pygame.locals import *
 from player import *
 from screen import *
 from background import *
+import time
 
 # Initialisation des variables
 clock = pygame.time.Clock()
-FPS = 60
+
+prev_time = time.time()
+
+FPS = 100
 
 dt = 0
 
@@ -28,6 +32,8 @@ class Game:
   def run(self):
     while self.running:
 
+      
+
       background.drawbg(screen,self.scroll) #Fonction qui dessine le background
 
       player.draw(screen) # Fonction qui dessine le joueur
@@ -37,9 +43,9 @@ class Game:
       # Contrôle du joueur
       keyPlayer = pygame.key.get_pressed()
       if keyPlayer[pygame.K_UP] and player.rect.y > 0:
-        player.rect.y -= dt * 300
+        player.rect.y -= player.speed * dt
       if keyPlayer[pygame.K_DOWN] and player.rect.y < (SCREEN_HEIGHT - 218):
-        player.rect.y += dt * 300
+        player.rect.y += player.speed * dt
       
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -52,8 +58,13 @@ pygame.init()# Initialisation de pygame
 
 game = Game(screen) # Variable pour le jeu 
 
+clock.tick(FPS)
 
-dt = 1 / clock.tick(FPS)# DeltaTime
+now = time.time()
+
+dt = now - prev_time
+prev_time = now# DeltaTime
+
 
 game.run()# Debut de la boucle de jeu 
 

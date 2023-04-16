@@ -7,7 +7,13 @@ import time
 pygame.init()
 
 clock = pygame.time.Clock()
-FPS = 60
+
+prev_time = time.time()
+
+dt = 0
+
+FPS = 120
+
 
 #create game window
 SCREEN_WIDTH = 800
@@ -18,7 +24,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 
 #define game variables
-scroll = 0
+scroll = dt
 
 ground_image = pygame.image.load("img/ground.png").convert_alpha()
 ground_width = ground_image.get_width()
@@ -86,7 +92,7 @@ def drawPlayer():
   player = pygame.Rect((playerPosX, playerPosY), (50, 50)) 
   colliderPlayer = pygame.draw.rect(screen, "red", player)
   return colliderPlayer 
-speedPlayer = 7
+speedplayer = 200
 
 drawTree(screen, scroll)
 
@@ -96,6 +102,13 @@ while run:
 
   clock.tick(FPS)
 
+  now = time.time()
+
+  dt = now - prev_time
+  prev_time = now
+
+  print(dt)
+
   #draw world
   drawBg()
   drawGround()
@@ -103,13 +116,11 @@ while run:
   #slime()
 
   # inifinite background (of poor)
-  scroll += 2
+  scroll += speedplayer * dt
 
-  
-    
+ 
 
 
-  
   
   colliderTree = drawTree(screen, scroll)
   colliderPlayer = drawPlayer()
@@ -122,21 +133,20 @@ while run:
   
   if pygame.Rect.colliderect(colliderGround, colliderPlayer) == True:
     if colliderPlayer.bottom > colliderGround.top:
-      playerPosY -= speedPlayer
+      playerPosY -= speedplayer * dt
   
   colliderSky = drawRectSky()
   
   if pygame.Rect.colliderect(colliderSky, colliderPlayer) == True:
     if colliderPlayer.top < colliderSky.bottom:
-      playerPosY += speedPlayer
+      playerPosY += speedplayer * dt
 
   # get keypresses player
   keyPlayer = pygame.key.get_pressed()
   if keyPlayer[pygame.K_UP] and playerPosY > 0:
-    print("ror")
-    playerPosY -= speedPlayer
+    playerPosY -= speedplayer * dt
   if keyPlayer[pygame.K_DOWN] and playerPosY < ( SCREEN_HEIGHT - 50 )  :
-    playerPosY += speedPlayer
+    playerPosY += speedplayer * dt
 
   
   
