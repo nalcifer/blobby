@@ -1,92 +1,75 @@
 import pygame
-import math
-# from randomGeneration import *
-from asset import *
-
-pygame.init()
-
-clock = pygame.time.Clock()
-FPS = 60
-
-#create game window
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 432
-
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
-#define game variables
-scroll = 0
-
-ground_image = pygame.image.load("img/ground.png").convert_alpha()
-ground_width = ground_image.get_width()
-ground_height = ground_image.get_height()
+from player import *
+from screen import *
+from background import *
+import time
 
 
-
-bg_image = pygame.image.load("img/bg.png").convert_alpha()
-bg_width = bg_image.get_width()
-bg_height = bg_image.get_height()
-
-
-# fonction qui défini le background 
-def drawBg():
-  for x in range(15):
-    screen.blit(bg_image, ((x * bg_width) - scroll * 2.5, SCREEN_HEIGHT - bg_height))
-    
-# fonction qui dessine le sol
-def drawGround():
-  for x in range(15):
-    screen.blit(ground_image, ((x * ground_width) - scroll * 2.5, SCREEN_HEIGHT - ground_height))
-
-# position de player
-playerPosX = 200
-playerPosY = 200
-
-# fonction qui dessine le player
-def drawPlayer():
-  player = pygame.Rect((playerPosX, playerPosY), (50, 50)) 
-  colliderPlayer = pygame.draw.rect(screen, "red", player)
-  return colliderPlayer 
-speedPlayer = 7
-
-drawTree(screen, scroll)
-
-#game loop
-run = True
-while run:
-
-  clock.tick(FPS)
-
-  #draw world
-  drawBg()
-  drawGround()
-  drawPlayer()
-
-  # inifinite background (of poor)
-  scroll += 3
+# Class principale pour le jeu
+class Game:
+  # Initialisation de la fênetre et de la boucle
+  def __init__(self, screen):
+    self.screen = screen
+    self.running = True
   
-  colliderTree = drawTree(screen, scroll)
-  colliderPlayer = drawPlayer()
-  if pygame.Rect.colliderect(colliderTree, colliderPlayer) == True:
-    run = False
-
-  # get keypresses player
-  keyPlayer = pygame.key.get_pressed()
-  if keyPlayer[pygame.K_UP] and playerPosY > 0:
-    playerPosY -= speedPlayer
-  if keyPlayer[pygame.K_DOWN] and playerPosY < ( SCREEN_HEIGHT - 50 )  :
-    playerPosY += speedPlayer
-
-  
-  
-    
-
-  #event handlers
-  for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-      run = False
-
-  pygame.display.update()
+  def var(self):
+    self.clock = pygame.time.Clock()
+    self.FPS = 60
+    self.dt = 0
+    self.player = Player(200,251)
+    self.background = Background()
+    self.prev_time = time.time()
 
 
-pygame.quit()
+  # Fonction pour la boucle principale
+  def run(self):
+    scroll = self.dt
+    while self.running:
+
+      
+      self.clock.tick(self.FPS)# DeltaTime
+
+      self.now = time.time()
+
+      self.dt = self.now - self.prev_time
+      self.prev_time = self.now
+
+      print(self.dt)
+
+
+      self.background.drawbg(screen,scroll) #Fonction qui dessine le background
+
+      self.player.draw(screen) # Fonction qui dessine le joueur
+
+      scroll += self.player.speed * self.dt
+
+      
+      
+
+
+      # Contrôle du joueur
+      keyPlayer = pygame.key.get_pressed()
+      if keyPlayer[pygame.K_UP] and self.player.rect.y > 0:
+        self.player.rect.y -= self.player.speed * self.dt
+      if keyPlayer[pygame.K_DOWN] and self.player.rect.y < (SCREEN_HEIGHT - 218):
+        self.player.rect.y += self.player.speed * self.dt
+      
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          self.running = False
+      
+      pygame.display.update()
+      
+pygame.init()# Initialisation de pygame
+
+
+
+game = Game(screen) # Variable pour le jeu 
+
+game.var()
+
+
+game.run()# Debut de la boucle de jeu 
+
+
+pygame.quit()# Fin de pygame 
