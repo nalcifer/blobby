@@ -23,8 +23,5 @@ class Background :
         nbr_img = round(( SCREEN_WIDTH * 2 ) / bg_width) + 1
         for i in range(nbr_img):
             screen.blit( self.img, ( - ( self.translateX - (i * SCREEN_HEIGHT * bg_ratio )) , self.posY ) )
-            # if i == 0:
-                # print(( self.translateX * (deltaTime * self.speed)) - (i * SCREEN_HEIGHT * bg_ratio ))
-
 
 

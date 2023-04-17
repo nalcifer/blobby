@@ -14,28 +14,13 @@ prev_time = time.time()
 
 
 background = Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, SPEED)
-# bg_image = pygame.transform.scale_by(pygame.image.load("img/bg.png"), (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-
-ground = FixedObject(tree_image, ((SCREEN_HEIGHT / 2) * tree_ratio), SCREEN_HEIGHT / 2, SCREEN_WIDTH + 100, SCREEN_HEIGHT / 2, 200)
-
-
-
-playerPosX = 200
-playerPosY = 200
-
-# fonction qui dessine le player
-def drawPlayer():
-  player = pygame.Rect((playerPosX, playerPosY), (50, 50)) 
-  colliderPlayer = pygame.draw.rect(screen, "red", player)
-  return colliderPlayer 
-speedPlayer = 7
 
 obstacles = []
 def redrawWindow():
-    for obstacle in obstacles:
-        obstacle.draw()
-    pygame.display.update()
+  for obstacle in obstacles:
+    obstacle.draw()
+  pygame.display.update()
 
 event1 = pygame.USEREVENT+1
 event2 = pygame.USEREVENT+2
@@ -70,27 +55,13 @@ while run:
 
 
 
-  background.update(deltaTime)
-  drawPlayer()
-
   for obstacle in obstacles: 
-     obstacle.posX -= deltaTime * SPEED 
-     if obstacle.posX < obstacle.posX * -1: # If our obstacle is off the screen we will remove it
-         obstacles.pop(obstacles.index(obstacle))
+    obstacle.posX -= deltaTime * SPEED 
+    if obstacle.posX < obstacle.posX * -1: # If our obstacle is off the screen we will remove it
+      obstacles.pop(obstacles.index(obstacle))
 
 
-
-  
-  # get keypresses player
-  keyPlayer = pygame.key.get_pressed()
-  if keyPlayer[pygame.K_UP] and playerPosY > 0:
-    playerPosY -= speedPlayer
-  if keyPlayer[pygame.K_DOWN] and playerPosY < ( SCREEN_HEIGHT - 50 )  :
-    playerPosY += speedPlayer
-
-  
-  
-    
+  background.update(deltaTime)
 
   #event handlers
   for event in pygame.event.get():
