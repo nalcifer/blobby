@@ -1,22 +1,9 @@
 import pygame
-from pygame.locals import *
 from player import *
 from screen import *
 from background import *
 import time
 
-# Initialisation des variables
-clock = pygame.time.Clock()
-
-prev_time = time.time()
-
-FPS = 100
-
-dt = 0
-
-
-player = Player(200,251) # Création du joueur
-background = Background() # Création du background
 
 # Class principale pour le jeu
 class Game:
@@ -24,28 +11,48 @@ class Game:
   def __init__(self, screen):
     self.screen = screen
     self.running = True
-    self.scroll = 0
-
   
+  def var(self):
+    self.clock = pygame.time.Clock()
+    self.FPS = 60
+    self.dt = 0
+    self.player = Player(200,251)
+    self.background = Background()
+    self.prev_time = time.time()
+
 
   # Fonction pour la boucle principale
   def run(self):
+    scroll = self.dt
     while self.running:
 
       
+      self.clock.tick(self.FPS)# DeltaTime
 
-      background.drawbg(screen,self.scroll) #Fonction qui dessine le background
+      self.now = time.time()
 
-      player.draw(screen) # Fonction qui dessine le joueur
+      self.dt = self.now - self.prev_time
+      self.prev_time = self.now
 
-      self.scroll += 3
+      print(self.dt)
+
+
+      self.background.drawbg(screen,scroll) #Fonction qui dessine le background
+
+      self.player.draw(screen) # Fonction qui dessine le joueur
+
+      scroll += self.player.speed * self.dt
+
+      
+      
+
 
       # Contrôle du joueur
       keyPlayer = pygame.key.get_pressed()
-      if keyPlayer[pygame.K_UP] and player.rect.y > 0:
-        player.rect.y -= player.speed * dt
-      if keyPlayer[pygame.K_DOWN] and player.rect.y < (SCREEN_HEIGHT - 218):
-        player.rect.y += player.speed * dt
+      if keyPlayer[pygame.K_UP] and self.player.rect.y > 0:
+        self.player.rect.y -= self.player.speed * self.dt
+      if keyPlayer[pygame.K_DOWN] and self.player.rect.y < (SCREEN_HEIGHT - 218):
+        self.player.rect.y += self.player.speed * self.dt
       
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -56,14 +63,10 @@ class Game:
 pygame.init()# Initialisation de pygame
 
 
+
 game = Game(screen) # Variable pour le jeu 
 
-clock.tick(FPS)
-
-now = time.time()
-
-dt = now - prev_time
-prev_time = now# DeltaTime
+game.var()
 
 
 game.run()# Debut de la boucle de jeu 

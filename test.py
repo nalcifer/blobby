@@ -12,7 +12,7 @@ prev_time = time.time()
 
 dt = 0
 
-FPS = 120
+FPS = 300
 
 
 #create game window
@@ -92,7 +92,7 @@ def drawPlayer():
   player = pygame.Rect((playerPosX, playerPosY), (50, 50)) 
   colliderPlayer = pygame.draw.rect(screen, "red", player)
   return colliderPlayer 
-speedplayer = 200
+speedplayer = 251
 
 drawTree(screen, scroll)
 
@@ -117,6 +117,7 @@ while run:
 
   # inifinite background (of poor)
   scroll += speedplayer * dt
+
 
  
 
