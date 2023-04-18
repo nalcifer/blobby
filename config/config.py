@@ -33,3 +33,12 @@ tree_height = tree_image.get_height()
 tree_ratio = tree_width/tree_height
 tree_image = pygame.transform.scale(tree_image, ((SCREEN_HEIGHT / 2) * tree_ratio , SCREEN_HEIGHT / 2))
 
+# player
+player_image = pygame.image.load("img/kirby.png").convert_alpha()
+player_width = player_image.get_width()
+player_height = player_image.get_height()
+player_ratio = player_width/tree_height
+player_width = (SCREEN_HEIGHT / 10) * tree_ratio
+player_height = SCREEN_HEIGHT / 10
+
+player_image = pygame.transform.scale(player_image, (player_width, player_height))
