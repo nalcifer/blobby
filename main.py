@@ -10,10 +10,8 @@ from pages.home import *
 # Class principale pour le jeu
 background = Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed)
 player = Player(player_image , player_width, player_height)
-pygame.joystick.init()
-pygame.font.init()
-font = pygame.font.Font('font\SedgwickAveDisplay-Regular.ttf', 52)
-joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
+
+
 
 class Game:
   # Initialisation de la fênetre et de la boucle
@@ -37,9 +35,7 @@ class Game:
 
       
       self.clock.tick(FPS)# DeltaTime
-
       self.now = time.time()
-
       self.dt = self.now - self.prev_time
       self.prev_time = self.now
 
@@ -49,16 +45,28 @@ class Game:
           run = False
 
         if event.type == event2:
-          r = random.randrange(0,2)
-          if r == 0:
-            obstacles.append(RandomGeneration(tree_image ,SCREEN_WIDTH, SCREEN_HEIGHT/2, 200, 200))
-        
+          obstacle = random.randrange(0,2)
+          if obstacle == 0:
+            obstacles.append(RandomGeneration(tree_image ,SCREEN_WIDTH, SCREEN_HEIGHT/2))
+      
+        objects = random.randrange(0,200)
+        if objects == 0:
+          fixedObjects.append(FixedObject(building_image ,SCREEN_WIDTH, SCREEN_HEIGHT/3))
+
 
       for bgs in bg: 
         bgs.posX = ( bgs.posX + (bg_speed * self.dt) ) % (SCREEN_HEIGHT * bg1_ratio)
+      
+
+      for objects in fixedObjects: 
+        objects.posX -= self.dt * (bg_speed / 2) 
+        if objects.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
+          objects.pop(objects.index(fixedObjects))
+        # Contrôle du joueur
+
       for obstacle in obstacles: 
         obstacle.posX -= self.dt * bg_speed 
-        if obstacle.posX < obstacle.posX * -1: # If our obstacle is off the screen we will remove it
+        if obstacle.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
           obstacles.pop(obstacles.index(obstacle))
         # Contrôle du joueur
 

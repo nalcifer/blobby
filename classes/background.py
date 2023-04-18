@@ -25,6 +25,6 @@ class Background :
 
     def initbg(self):
         for i in range(self.nbr_bg):
-            bg.append(Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
-            bg.append(Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
-            bg.append(Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
+            bg.append(Background(self.img1, self.img2, self.img3, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
+            bg.append(Background(self.img1, self.img2, self.img3, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
+            bg.append(Background(self.img1, self.img2, self.img3, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
