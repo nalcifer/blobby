@@ -68,6 +68,11 @@ class Game:
           player.y -= self.player.speed * self.dt
         if keyPlayer[pygame.K_DOWN] and self.player.rect.y < (SCREEN_HEIGHT - 218):
           player.y += self.player.speed * self.dt
+        if pygame.joystick.Joystick(0).get_button(11) and self.player.rect.y > 0:
+          player.y -= self.player.speed * self.dt
+        if pygame.joystick.Joystick(0).get_button(12) and self.player.rect.y < (SCREEN_HEIGHT - 218):
+          player.y += self.player.speed * self.dt
+
           
 
        
