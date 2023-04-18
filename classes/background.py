@@ -2,8 +2,10 @@ from config.screen import *
 from config.config import *
 
 class Background :
-    def __init__(self, img, posX, posY, screenWidth, screenHeight, speed, translateX=0):
-        self.img = img
+    def __init__(self, img1, img2, img3, posX, posY, screenWidth, screenHeight, speed, translateX=0):
+        self.img1 = img1
+        self.img2 = img2
+        self.img3 = img3
         self.posX = posX
         self.posY = posY
         self.speed = speed
@@ -11,14 +13,18 @@ class Background :
         self.screenHeight = screenHeight
         self.translateX = translateX
         
-        self.nbr_bg = round(( SCREEN_WIDTH * 3 ) / bg_width) + 1
+        self.nbr_bg = round(( SCREEN_WIDTH * 3 ) / bg1_width) + 1
 
     def drawBg(self) :
         posXtemp = self.posX
         posXtemp = ( -posXtemp )
         for i in range(self.nbr_bg):
-            screen.blit(self.img, (posXtemp + (posXtemp + (i * SCREEN_HEIGHT * bg_ratio)), self.posY))
+            screen.blit(self.img1, (posXtemp + (posXtemp + (i * SCREEN_HEIGHT * bg1_ratio)), self.posY))
+            screen.blit(self.img2, (posXtemp + (posXtemp + (i * SCREEN_HEIGHT * bg1_ratio)), self.posY))
+            screen.blit(self.img3, (posXtemp + (posXtemp + (i * SCREEN_HEIGHT * bg1_ratio)), self.posY))
 
     def initbg(self):
         for i in range(self.nbr_bg):
-            bg.append(Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
+            bg.append(Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
+            bg.append(Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
+            bg.append(Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))

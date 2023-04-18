@@ -19,11 +19,25 @@ pygame.time.set_timer(event2, random.randrange(2000, 3500)) # Will trigger every
 
 # ------- LOAD IMG --------
 # background
-bg_image = pygame.image.load("img/bg.png").convert_alpha()
-bg_width = bg_image.get_width()
-bg_height = bg_image.get_height()
-bg_ratio = bg_width/bg_height
-bg_image = pygame.transform.scale(bg_image, ((SCREEN_HEIGHT * bg_ratio), SCREEN_HEIGHT))
+bg1_image = pygame.image.load("img/layer 1.png").convert_alpha()
+bg1_width = bg1_image.get_width()
+bg1_height = bg1_image.get_height()
+bg1_ratio = bg1_width/bg1_height
+bg1_image = pygame.transform.scale(bg1_image, ((SCREEN_HEIGHT * bg1_ratio), SCREEN_HEIGHT))
+
+bg2_image = pygame.image.load("img/layer 2.png").convert_alpha()
+bg2_width = bg2_image.get_width()
+bg2_height = bg2_image.get_height()
+bg2_ratio = bg2_width/bg2_height
+bg2_image = pygame.transform.scale(bg2_image, ((SCREEN_HEIGHT * bg2_ratio), SCREEN_HEIGHT))
+
+bg3_image = pygame.image.load("img/layer 3.png").convert_alpha()
+bg3_width = bg3_image.get_width()
+bg3_height = bg3_image.get_height()
+bg3_ratio = bg3_width/bg3_height
+bg3_image = pygame.transform.scale(bg3_image, ((SCREEN_HEIGHT * bg3_ratio), SCREEN_HEIGHT))
+
+
 
 
 # fixed object
