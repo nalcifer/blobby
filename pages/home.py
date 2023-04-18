@@ -1,7 +1,8 @@
 import pygame
+from config.screen import *
 pygame.font.init()
 
-def launch(screen, font):
+def home(font):
     joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
     run = False
     while run == False:

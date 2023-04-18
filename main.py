@@ -5,7 +5,7 @@ from classes.background import *
 from classes.generationaleatoire import *
 from classes.fixedObject import *
 from config.config import *
-from home import *
+from pages.home import *
 
 # Class principale pour le jeu
 background = Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed)
@@ -14,7 +14,8 @@ pygame.joystick.init()
 pygame.font.init()
 font = pygame.font.Font('font\SedgwickAveDisplay-Regular.ttf', 52)
 joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
-print(joysticks)
+
+run = False
 
 class Game:
   # Initialisation de la fênetre et de la boucle
@@ -83,9 +84,14 @@ game = Game(screen) # Variable pour le jeu
 
 game.var()
 
+
+
 player.initPlayer()
 background.initbg()
-game.run()# Debut de la boucle de jeu 
+
+run = home(font)
+if run == True:
+  game.run()# Debut de la boucle de jeu 
 
 
 pygame.quit()# Fin de pygame 
