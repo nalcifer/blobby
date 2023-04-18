@@ -1,5 +1,6 @@
 import pygame
-from config import *
+from config.config import *
+from config.screen import *
 
 class RandomGeneration:
     def __init__(self, img, posX, posY, width, height):

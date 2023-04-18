@@ -1,5 +1,5 @@
-import pygame 
-from config import *
+from config.screen import *
+from config.config import *
 
 class Background :
     def __init__(self, img, posX, posY, screenWidth, screenHeight, speed, translateX=0):
@@ -10,18 +10,15 @@ class Background :
         self.screenWidth = screenWidth
         self.screenHeight = screenHeight
         self.translateX = translateX
+        
+        self.nbr_bg = round(( SCREEN_WIDTH * 3 ) / bg_width) + 1
 
     def drawBg(self) :
-        nbr_img = round(( SCREEN_WIDTH * 2 ) / bg_width) + 1
-        for i in range(nbr_img):
-            self.posX = 0
-            screen.blit(self.img, (self.posX + (self.posX + (i * SCREEN_HEIGHT * bg_ratio)), self.posY))
+        posXtemp = self.posX
+        posXtemp = ( -posXtemp )
+        for i in range(self.nbr_bg):
+            screen.blit(self.img, (posXtemp + (posXtemp + (i * SCREEN_HEIGHT * bg_ratio)), self.posY))
 
-
-    def update(self, deltaTime) : 
-        self.translateX = ( self.translateX + (self.speed * deltaTime) ) % (SCREEN_HEIGHT * bg_ratio)
-        nbr_img = round(( SCREEN_WIDTH * 2 ) / bg_width) + 1
-        for i in range(nbr_img):
-            screen.blit( self.img, ( - ( self.translateX - (i * SCREEN_HEIGHT * bg_ratio )) , self.posY ) )
-
-
+    def initbg(self):
+        for i in range(self.nbr_bg):
+            bg.append(Background(bg_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
