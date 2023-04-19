@@ -70,13 +70,24 @@ class Game:
         if pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == True:
           pygame.quit()
         elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == False:
-          print("bad")
+          if self.player_level > 0:
+            print("bad")
+            self.player_level -= 1
+            self.player.speed /= 1.2
+          elif self.player_level >= 0:
+            print("bad")
+            self.player_level -= 1
           obstacles.pop(obstacles.index(obstacle))
-          pass
+          
         elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == True:
-          print("good")
+          if self.player_level < 7:
+            print("good")
+            self.player_level += 1
+            self.player.speed *= 1.2
+          elif self.player_level <= 7:
+            print("good")
+            self.player_level += 1
           obstacles.pop(obstacles.index(obstacle))
-          pass
 
       # Contrôle du joueur
       keyPlayer = pygame.key.get_pressed()
