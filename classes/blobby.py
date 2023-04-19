@@ -13,6 +13,7 @@ class Player:
 
     def draw(self):
         screen.blit(self.img, (self.x, self.y))
+        self.rect = self.img.get_rect(x=self.x, y=self.y)
 
 
     def initPlayer(self):

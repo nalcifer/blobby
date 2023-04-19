@@ -4,7 +4,7 @@ from config.screen import *
 #create game window
 FPS = 60
 
-bg_speed = 100
+bg_speed = 200
 
 pygame.joystick.init()
 pygame.font.init()
@@ -16,10 +16,10 @@ joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_coun
 event1 = pygame.USEREVENT+1
 event2 = pygame.USEREVENT+2
 
-pygame.time.set_timer(event1, 500)
+pygame.time.set_timer(event1, 100)
 pygame.time.set_timer(event2, 3000)
 
-pygame.time.set_timer(event2, random.randrange(2000, 3500)) # Will trigger every 2 - 3.5 seconds
+pygame.time.set_timer(event2, random.randrange(1500, 2000)) # Will trigger every 2 - 3.5 seconds
 
 
 # ------- LOAD IMG --------
@@ -54,13 +54,14 @@ tree_width = (SCREEN_HEIGHT / 2) * tree_ratio
 tree_height =  SCREEN_HEIGHT / 2
 tree_image = pygame.transform.scale(tree_image, ((SCREEN_HEIGHT / 2) * tree_ratio , SCREEN_HEIGHT / 2))
 
+
 # player
 player_image = pygame.image.load("img/kirby.png").convert_alpha()
 player_width = player_image.get_width()
 player_height = player_image.get_height()
 player_ratio = player_width/player_height
-player_width = (SCREEN_HEIGHT / 10) * player_ratio
-player_height = SCREEN_HEIGHT / 10
+player_width = (SCREEN_HEIGHT / 6) * player_ratio
+player_height = SCREEN_HEIGHT / 6
 player_image = pygame.transform.scale(player_image, (player_width, player_height))
 
 # fixed object
@@ -71,3 +72,20 @@ building_ratio = building_witdh/building_height
 building_witdh = 3*SCREEN_HEIGHT/5 * building_ratio
 building_height = 3*SCREEN_HEIGHT/4
 building_image = pygame.transform.scale(building_image, (building_witdh, building_height))
+
+# Consumables
+consumables_good_image = pygame.image.load("img/consumable_good.png").convert_alpha()
+consumables_good_witdh = consumables_good_image.get_width()
+consumables_good_height = consumables_good_image.get_height()
+consumables_good_ratio = consumables_good_witdh/consumables_good_height
+consumables_good_witdh = SCREEN_HEIGHT/8 * consumables_good_ratio
+consumables_good_height = SCREEN_HEIGHT/8
+consumables_good_image = pygame.transform.scale(consumables_good_image, (consumables_good_witdh, consumables_good_height))
+
+consumables_bad_image = pygame.image.load("img/consumable_bad.png").convert_alpha()
+consumables_bad_witdh = consumables_bad_image.get_width()
+consumables_bad_height = consumables_bad_image.get_height()
+consumables_bad_ratio = consumables_bad_witdh/consumables_bad_height
+consumables_bad_witdh = SCREEN_HEIGHT/8 * consumables_bad_ratio
+consumables_bad_height = SCREEN_HEIGHT/8
+consumables_bad_image = pygame.transform.scale(consumables_bad_image, (consumables_bad_witdh, consumables_bad_height))

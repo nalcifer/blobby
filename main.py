@@ -12,7 +12,6 @@ background = Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREE
 player = Player(player_image , player_width, player_height)
 
 
-
 class Game:
   # Initialisation de la fênetre et de la boucle
   def __init__(self, screen):
@@ -45,11 +44,17 @@ class Game:
           run = False
 
         if event.type == event2:
-          obstacle = random.randrange(0,2)
+          obstacle = random.randrange(0,10)
           if obstacle == 0:
-            obstacles.append(RandomGeneration(tree_image ,SCREEN_WIDTH, SCREEN_HEIGHT/2))
-      
-        objects = random.randrange(0,200)
+            obstacles.append(RandomGeneration(tree_image ,SCREEN_WIDTH, SCREEN_HEIGHT/2, collide = True, good = False))
+          elif obstacle == 1:
+            obstacles.append(RandomGeneration(consumables_bad_image ,SCREEN_WIDTH, random.randrange(100000) % SCREEN_HEIGHT, collide = False, good = False))
+          elif obstacle == 2:
+            obstacles.append(RandomGeneration(consumables_good_image ,SCREEN_WIDTH, random.randrange(100000) % SCREEN_HEIGHT,  collide = False, good = True))
+        
+        
+        
+        objects = random.randrange(0,100)
         if objects == 0:
           fixedObjects.append(FixedObject(building_image ,SCREEN_WIDTH, SCREEN_HEIGHT/3))
 
@@ -68,8 +73,18 @@ class Game:
         obstacle.posX -= self.dt * bg_speed 
         if obstacle.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
           obstacles.pop(obstacles.index(obstacle))
-        # Contrôle du joueur
+        if pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == True:
+          pygame.quit()
+        elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == False:
+          print("bad")
+          obstacles.pop(obstacles.index(obstacle))
+          pass
+        elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == True:
+          print("good")
+          obstacles.pop(obstacles.index(obstacle))
+          pass
 
+      # Contrôle du joueur
       keyPlayer = pygame.key.get_pressed()
       for player in players:
         if keyPlayer[pygame.K_UP] and self.player.rect.y > 0:
