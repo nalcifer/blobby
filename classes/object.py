@@ -2,7 +2,7 @@ import pygame
 from config.config import *
 from config.screen import *
 
-class RandomGeneration:
+class Object:
     def __init__(self, img, posX, posY, collide, good):
         self.img = img
         self.posX = posX

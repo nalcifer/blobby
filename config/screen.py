@@ -7,13 +7,13 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Blobby")
 
 bg = []
-fixedObjects = []
+layerss = []
 obstacles = []
 players = []
 def redrawWindow():
     for bgs in bg: 
        bgs.drawBg()
-    for objects in fixedObjects:
+    for objects in layerss:
         objects.draw()
     for obstacle in obstacles:
         obstacle.draw()

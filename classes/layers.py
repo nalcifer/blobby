@@ -2,7 +2,7 @@ import pygame
 from config.config import *
 from config.screen import *
 
-class FixedObject:
+class Layers:
     def __init__(self, img, posX, posY):
         self.img = img
         self.posX = posX
