@@ -3,7 +3,6 @@ from config.screen import *
 
 #create game window
 FPS = 60
-
 bg_speed = 200
 
 pygame.joystick.init()
