@@ -1,10 +1,10 @@
-import pygame, time, random
+import pygame
 from classes.blobby import *
 from config.screen import *
 from classes.background import *
-from game import *
+from classes.game import *
 
-pygame.init()# Initialisation de pygame
+pygame.init() # Initialisation de pygame
 
 game = Game(screen) # Variable pour le jeu 
 game.var()

@@ -12,7 +12,6 @@ background = Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREE
 player = Player(player_image , player_width, player_height)
 
 
-
 class Game:
   # Initialisation de la fênetre et de la boucle
   def __init__(self, screen):
@@ -53,9 +52,11 @@ class Game:
         if objects == 0:
           layerss.append(Layers(building_image ,SCREEN_WIDTH, SCREEN_HEIGHT/3))
 
+      # Déplacement du background en fonction du delta time 
       for bgs in bg: 
         bgs.posX = ( bgs.posX + (bg_speed * self.dt) ) % (SCREEN_HEIGHT * bg1_ratio)
       
+
       for objects in layerss: 
         objects.posX -= self.dt * (bg_speed / 2) 
         if objects.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
