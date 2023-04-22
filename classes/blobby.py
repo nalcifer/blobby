@@ -17,4 +17,6 @@ class Player:
 
 
     def initPlayer(self):
-        players.append(Player(player_image, player_width, player_height))
+        if len(players)!= 0:
+            del players[0]
+        players.append(Player(self.img, player_width, player_height))
