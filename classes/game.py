@@ -67,16 +67,48 @@ class Game:
         obstacle.posX -= self.dt * bg_speed 
         if obstacle.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
           obstacles.pop(obstacles.index(obstacle))
-        if pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == True:
-          pygame.quit()
-        elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == False:
-          print("bad")
-          obstacles.pop(obstacles.index(obstacle))
-          pass
-        elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == True:
-          print("good")
-          obstacles.pop(obstacles.index(obstacle))
-          pass
+        if pygame.Rect.colliderect(obstacle.rect, player.rect) == True :
+          # Si c'est un obstacle mortel alors fin de la partie
+          if obstacle.collide == True :
+            pygame.quit()
+          # Si c'est un element comestible
+          elif obstacle.collide == False :
+            
+            objectCaught = obstacles.pop(obstacles.index(obstacle))
+            # objectCaught = obstacles.pop(obstacles.index(obstacle))
+            
+            #--garder en mémoire durant un certain temps 
+            if keyPlayer[pygame.K_SPACE] :
+              if objectCaught.good == False:
+                print("bad")
+                del objectCaught
+                pass
+              elif objectCaught.good == True:
+                print("good")
+                del objectCaught
+                pass
+            elif keyPlayer[pygame.K_RSHIFT] :
+              objectsCaught.append(objectCaught)
+              print(objectCaught.posX)
+              del objectCaught
+              # objectCaught.posX += 10
+                #--si ça touche un autre objet consomable 
+                  #--alors objet disparait
+            #--si pas avalé ou lancé avant un certain temps 
+              #--avaler
+              
+      for objects in objectsCaught: 
+        objects.posX += self.dt * (bg_speed / 2) 
+        if objects.posX > ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
+          objectsCaught.pop(objectsCaught.index(objects))
+        # elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == False:
+        #   print("bad")
+        #   obstacles.pop(obstacles.index(obstacle))
+        #   pass
+        # elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == True:
+        #   print("good")
+        #   obstacles.pop(obstacles.index(obstacle))
+        #   pass
 
       # Contrôle du joueur
       keyPlayer = pygame.key.get_pressed()
