@@ -3,7 +3,8 @@ from config.screen import *
 
 #create game window
 FPS = 60
-bg_speed = 200
+bg_speed = 50
+speed_level = 200
 
 pygame.joystick.init()
 pygame.font.init()

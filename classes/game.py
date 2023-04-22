@@ -23,6 +23,7 @@ class Game:
     self.player = Player(player_image , player_width, player_height)
     self.background = Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed)
     self.prev_time = time.time()
+    self.player_level = 4
 
   # Fonction pour la boucle principale
   def run(self):
@@ -42,15 +43,15 @@ class Game:
         if event.type == event2:
           obstacle = random.randrange(0,10)
           if obstacle == 0:
-            obstacles.append(Object(tree_image ,SCREEN_WIDTH, SCREEN_HEIGHT/2, collide = True, good = False))
+            obstacles.append(Object(building_image ,SCREEN_WIDTH, SCREEN_HEIGHT/2, collide = True, good = False))
           elif obstacle == 1:
             obstacles.append(Object(consumables_bad_image ,SCREEN_WIDTH, random.randrange(100000) % SCREEN_HEIGHT, collide = False, good = False))
           elif obstacle == 2:
             obstacles.append(Object(consumables_good_image ,SCREEN_WIDTH, random.randrange(100000) % SCREEN_HEIGHT,  collide = False, good = True)) 
         
-        objects = random.randrange(0,100)
-        if objects == 0:
-          layerss.append(Layers(building_image ,SCREEN_WIDTH, SCREEN_HEIGHT/3))
+        # objects = random.randrange(0,100)
+        # if objects == 0:
+        #   layerss.append(Layers(building_image ,SCREEN_WIDTH, SCREEN_HEIGHT/3))
 
       # Déplacement du background en fonction du delta time 
       for bgs in bg: 
@@ -58,13 +59,13 @@ class Game:
       
 
       for objects in layerss: 
-        objects.posX -= self.dt * (bg_speed / 2) 
+        objects.posX -= self.dt * (bg_speed * 2) 
         if objects.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
           layerss.pop(layerss.index(objects))
 
         # Contrôle du joueur
       for obstacle in obstacles: 
-        obstacle.posX -= self.dt * bg_speed 
+        obstacle.posX -= self.dt * speed_level 
         if obstacle.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
           obstacles.pop(obstacles.index(obstacle))
         if pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == True:
