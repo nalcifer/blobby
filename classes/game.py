@@ -11,7 +11,6 @@ from pages.home import *
 background = Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed)
 player = Player(player_image , player_width, player_height)
 
-
 class Game:
   # Initialisation de la fênetre et de la boucle
   def __init__(self, screen):
@@ -23,6 +22,8 @@ class Game:
     self.player = Player(player_image , player_width, player_height)
     self.background = Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed)
     self.prev_time = time.time()
+    self.objectInMouse = []
+    self.lenObjectInMouse = len(self.objectInMouse)
 
   # Fonction pour la boucle principale
   def run(self):
@@ -72,44 +73,42 @@ class Game:
           if obstacle.collide == True :
             pygame.quit()
           # Si c'est un element comestible
-          elif obstacle.collide == False :
-            
-            objectCaught = obstacles.pop(obstacles.index(obstacle))
-            # objectCaught = obstacles.pop(obstacles.index(obstacle))
-            
-            #--garder en mémoire durant un certain temps 
-            if keyPlayer[pygame.K_SPACE] :
-              if objectCaught.good == False:
-                print("bad")
-                del objectCaught
-                pass
-              elif objectCaught.good == True:
-                print("good")
-                del objectCaught
-                pass
-            elif keyPlayer[pygame.K_RSHIFT] :
-              objectsCaught.append(objectCaught)
-              print(objectCaught.posX)
-              del objectCaught
-              # objectCaught.posX += 10
-                #--si ça touche un autre objet consomable 
-                  #--alors objet disparait
-            #--si pas avalé ou lancé avant un certain temps 
-              #--avaler
-              
-      for objects in objectsCaught: 
-        objects.posX += self.dt * (bg_speed / 2) 
-        if objects.posX > ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
-          objectsCaught.pop(objectsCaught.index(objects))
-        # elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == False:
-        #   print("bad")
-        #   obstacles.pop(obstacles.index(obstacle))
-        #   pass
-        # elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == True:
-        #   print("good")
-        #   obstacles.pop(obstacles.index(obstacle))
-        #   pass
+          elif obstacle.collide == False and len(self.objectInMouse) == 0:
+            print("aaaaaaaaaa")
+            self.objectInMouse.append(obstacle)
+            obstacles.pop(obstacles.index(obstacle))
 
+
+      print(len(self.objectInMouse))
+      if len(self.objectInMouse) == 1:
+        for objects in self.objectInMouse:
+          if keyPlayer[pygame.K_SPACE]:
+            if objects.good == False:
+              print("bad")
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
+              
+            elif objects.good == True:
+              print("good")
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
+
+
+          elif keyPlayer[pygame.K_RSHIFT] :
+            objectsCaught.append(objects)
+            self.objectInMouse.pop(self.objectInMouse.index(objects))
+            objects.posY = player.y
+
+
+
+
+
+
+      for objects in objectsCaught: 
+        objects.posX += self.dt * ( bg_speed * 2 ) 
+        if objects.posX >  SCREEN_WIDTH : # If our obstacle is off the screen we will remove it
+          objectsCaught.pop(objectsCaught.index(objects))
+
+
+          
       # Contrôle du joueur
       keyPlayer = pygame.key.get_pressed()
       for player in players:
