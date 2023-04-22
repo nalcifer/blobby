@@ -19,4 +19,4 @@ class Player:
     def initPlayer(self):
         if len(players)!= 0:
             del players[0]
-        players.append(Player(self.img, player_width, player_height))
+        players.append(Player(self.img, self.x, self.y))

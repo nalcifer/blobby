@@ -24,6 +24,7 @@ class Game:
     self.prev_time = time.time()
     self.time_between_animation = 0
     self.player_level = 4
+    self.move_y = player_height
     self.number_sprite = 0
 
   def animation(self, list_anim, current_image, deltatime, y, time = 0.2):
@@ -32,6 +33,7 @@ class Game:
         # print(self.number_sprite)
         current_image = list_anim[self.number_sprite]
         time = 0
+        print(y)
       self.player = Player(current_image , player_width, y)
       self.player.initPlayer()
       time += deltatime
@@ -107,14 +109,13 @@ class Game:
 
       # Contrôle du joueur
       keyPlayer = pygame.key.get_pressed()
-      move_y = player_height
       for player in players:
         if keyPlayer[pygame.K_UP] and self.player.rect.y > 0:
-          move_y -= self.player.speed * self.dt
+          self.move_y -= self.player.speed * self.dt
         if keyPlayer[pygame.K_DOWN] and self.player.rect.y < (SCREEN_HEIGHT - 218):
-          move_y += self.player.speed * self.dt
+          self.move_y += self.player.speed * self.dt
       
-      self.animation(player_image_good, self.current_player_image, self.dt, move_y)
+      self.animation(player_image_good, self.current_player_image, self.dt, self.move_y)
        
       pygame.display.flip()
       pygame.display.update()
