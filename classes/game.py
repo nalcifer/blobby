@@ -48,9 +48,9 @@ class Game:
           if obstacle == 0:
             obstacles.append(Object(building_image ,SCREEN_WIDTH, SCREEN_HEIGHT/2, collide = True, good = False))
           elif obstacle == 1:
-            obstacles.append(Object(consumables_bad_image ,SCREEN_WIDTH, random.randrange(100000) % SCREEN_HEIGHT, collide = False, good = False))
+            obstacles.append(Object(consumables_bad_image ,SCREEN_WIDTH, random.randrange(100000) % ( SCREEN_HEIGHT - consumables_bad_height) , collide = False, good = False))
           elif obstacle == 2:
-            obstacles.append(Object(consumables_good_image ,SCREEN_WIDTH, random.randrange(100000) % SCREEN_HEIGHT,  collide = False, good = True)) 
+            obstacles.append(Object(consumables_good_image ,SCREEN_WIDTH, random.randrange(100000) % ( SCREEN_HEIGHT - consumables_good_height),  collide = False, good = True)) 
         
         # objects = random.randrange(0,100)
         # if objects == 0:

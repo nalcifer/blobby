@@ -14,12 +14,12 @@ players = []
 def redrawWindow():
     for bgs in bg: 
        bgs.drawBg()
-    for obstacle in obstacles:
-        obstacle.draw()
     for objects in layerss:
         objects.draw()
     for objectCaught in objectsCaught:
         objectCaught.draw()
+    for obstacle in obstacles:
+        obstacle.draw()
     for player in players:
         player.draw()
     pygame.display.update()
