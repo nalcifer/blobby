@@ -12,7 +12,6 @@ class Object:
         self.good = good
 
 
-    def draw(self, rotate):
-        rotated_img = pygame.transform.rotate(self.img, rotate)
-        screen.blit(rotated_img, (self.posX, self.posY))
+    def draw(self):
+        screen.blit(self.img, (self.posX, self.posY))
         self.rect = self.img.get_rect(x = self.posX, y = self.posY)
