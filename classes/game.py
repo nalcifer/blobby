@@ -103,11 +103,11 @@ class Game:
           if pygame.Rect.colliderect(obstacle.rect, obstaclee.rect) == True and obstaclee != obstacle:
             print("aaaa")
             obstacles.pop(obstacles.index(obstaclee))
-        for objects in objectsCaught:
-          if pygame.Rect.colliderect(obstacle.rect, obstaclee.rect) == True:
-            print("bbbb")
-            obstacles.pop(obstacles.index(obstacle))
-            objectsCaught.pop(objectsCaught.index(objects))
+          for objects in objectsCaught:
+            if pygame.Rect.colliderect(objects.rect, obstaclee.rect) == True and obstaclee.collide == False:
+              print("bbbb")
+              objectsCaught.pop(objectsCaught.index(objects))
+              obstacles.pop(obstacles.index(obstaclee))
 
 
       if len(self.objectInMouse) == 1:
