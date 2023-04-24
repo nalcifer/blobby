@@ -118,24 +118,44 @@ class Game:
         for objects in self.objectInMouse:
           # Avaler
           if keyPlayer[pygame.K_SPACE]:
-            if objects.good == False:
-              self.objectInMouse.pop(self.objectInMouse.index(objects))
-              
-            elif objects.good == True:
-              self.objectInMouse.pop(self.objectInMouse.index(objects))
+            if objects.good == True and self.player_level < 7 and self.player_level != 0:
+              print("aaa")
+              self.player_level += 1
+              self.player.speed *= 10
+            elif objects.good == True and self.player_level == 7:
+              print("bbb")
+              self.player_level += 1
+            elif objects.good == True and self.player_level == 1:
+              print("ccc")
+              self.player_level += 1
+            if objects.good == False and self.player_level > 1 and self.player_level != 7:
+              print("aaa")
+              self.player_level -= 1 
+              self.player.speed /= 10
+            elif objects.good == False and self.player_level == 1:
+              print("bbb")
+              self.player_level -= 1
+            elif objects.good == False and self.player_level == 7:
+              print("ccc")
+              self.player_level -= 1
 
           # Recracher
           elif keyPlayer[pygame.K_RSHIFT] :
             objectsCaught.append(objects)
             self.objectInMouse.pop(self.objectInMouse.index(objects))
             objects.posY = player.y
+            # Changement de la difficition en fonction de ce que le joueur avale
+            
+            
 
-      # Boucle pour changer la vitesse du joueur en fonction de ce qu'il avale --> à revoir
+      # Déplacement des objets recrachés
       for objects in objectsCaught: 
         objects.posX += self.dt * ( bg_speed * 2 ) 
         if objects.posX >  SCREEN_WIDTH : 
           objectsCaught.pop(objectsCaught.index(objects))
           
+
+      
       # Contrôle du joueur
       keyPlayer = pygame.key.get_pressed()
       for player in players:
