@@ -10,8 +10,7 @@ from pages.home import *
 # Class principales pour le jeu
 background = Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed)
 
-#current_player_sprite_good = 0
-player = Player(player_image , player_width, player_height)
+current_player_sprite_good = 0
 
 
 class Game:
@@ -31,6 +30,9 @@ class Game:
     self.move_y = player_height
     self.number_sprite = 0
 
+    self.objectInMouse = []
+    self.lenObjectInMouse = len(self.objectInMouse)
+
   def animation(self, list_anim, current_image, deltatime, y, time = 0.2):
       if time >= 0.2:
         self.number_sprite = (self.number_sprite + 1) % len(list_anim)
@@ -41,15 +43,14 @@ class Game:
       time += deltatime
 
 # début problème
-    #self.objectInMouse = []
-    #self.lenObjectInMouse = len(self.objectInMouse)
+  
 # fin problème
 
 
   # Fonction pour la boucle principale
   def run(self):
     while self.running:
-      redrawWindow(rotate)
+      redrawWindow()
 
 
       self.clock.tick(FPS)# DeltaTime

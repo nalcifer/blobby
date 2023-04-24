@@ -13,9 +13,8 @@ layerss = []
 obstacles = []
 objectsCaught = []
 players = []
-def redrawWindow(rotate):
-    print(rotate)
-    rotate += 1
+def redrawWindow():
+    
     for bgs in bg: 
        bgs.drawBg()
     for objects in layerss:
