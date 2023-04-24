@@ -89,29 +89,34 @@ class Game:
         obstacle.posX -= self.dt * speed_level 
         if obstacle.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
           obstacles.pop(obstacles.index(obstacle))
-          
-# début problème
+
+
         if pygame.Rect.colliderect(obstacle.rect, player.rect) == True :
           # Si c'est un obstacle mortel alors fin de la partie
           if obstacle.collide == True :
             pygame.quit()
           # Si c'est un element comestible
           elif obstacle.collide == False and len(self.objectInMouse) == 0:
-            print("aaaaaaaaaa")
             self.objectInMouse.append(obstacle)
             obstacles.pop(obstacles.index(obstacle))
+        for obstaclee in obstacles: 
+          if pygame.Rect.colliderect(obstacle.rect, obstaclee.rect) == True and obstaclee != obstacle:
+            print("aaaa")
+            obstacles.pop(obstacles.index(obstaclee))
+        for objects in objectsCaught:
+          if pygame.Rect.colliderect(obstacle.rect, obstaclee.rect) == True:
+            print("bbbb")
+            obstacles.pop(obstacles.index(obstacle))
+            objectsCaught.pop(objectsCaught.index(objects))
 
 
-      print(len(self.objectInMouse))
       if len(self.objectInMouse) == 1:
         for objects in self.objectInMouse:
           if keyPlayer[pygame.K_SPACE]:
             if objects.good == False:
-              print("bad")
               self.objectInMouse.pop(self.objectInMouse.index(objects))
               
             elif objects.good == True:
-              print("good")
               self.objectInMouse.pop(self.objectInMouse.index(objects))
 
 
@@ -124,29 +129,6 @@ class Game:
         objects.posX += self.dt * ( bg_speed * 2 ) 
         if objects.posX >  SCREEN_WIDTH : # If our obstacle is off the screen we will remove it
           objectsCaught.pop(objectsCaught.index(objects))
-# milieu problème
-        # if pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == True:
-        #   pygame.quit()
-        # elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == False:
-        #   if self.player_level > 0:
-        #     print("bad")
-        #     self.player_level -= 1
-        #     self.player.speed /= 1.2
-        #   elif self.player_level >= 0:
-        #     print("bad")
-        #     self.player_level -= 1
-        #   obstacles.pop(obstacles.index(obstacle))
-          
-        # elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == True:
-        #   if self.player_level < 7:
-        #     print("good")
-        #     self.player_level += 1
-        #     self.player.speed *= 1.2
-        #   elif self.player_level <= 7:
-        #     print("good")
-        #     self.player_level += 1
-        #   obstacles.pop(obstacles.index(obstacle))
-# fin problème
           
       # Contrôle du joueur
       keyPlayer = pygame.key.get_pressed()
