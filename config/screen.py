@@ -11,6 +11,7 @@ pygame.display.set_caption("Blobby")
 bg = []
 layerss = []
 obstacles = []
+objectsCaught = []
 players = []
 def redrawWindow(rotate):
     print(rotate)
@@ -20,7 +21,9 @@ def redrawWindow(rotate):
     for objects in layerss:
         objects.draw()
     for obstacle in obstacles:
-        obstacle.draw(rotate)
+        obstacle.draw()
+    for objectCaught in objectsCaught:
+        objectCaught.draw()
     for player in players:
         player.draw()
     pygame.display.update()
