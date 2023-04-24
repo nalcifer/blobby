@@ -1,15 +1,17 @@
 import pygame, random
 from config.screen import *
 
-#create game window
+# Variables "globales"
 FPS = 60
 bg_speed = 50
 speed_level = 200
 
+# Initialisation des manettes
 pygame.joystick.init()
+joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
+# Initialisation de la police
 pygame.font.init()
 font = pygame.font.Font('font\SedgwickAveDisplay-Regular.ttf', 52)
-joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
 
 
 # -------- EVENT ----------
@@ -42,8 +44,8 @@ bg3_height = bg3_image.get_height()
 bg3_ratio = bg3_width/bg3_height
 bg3_image = pygame.transform.scale(bg3_image, ((SCREEN_HEIGHT * bg3_ratio), SCREEN_HEIGHT))
 
-# blobby good
 
+# Blobby : définition de la taille du joueur dans la scène
 image_player_type = pygame.image.load("img/blobby/blobby_bad_1.png").convert_alpha()
 player_width = image_player_type.get_width()
 player_height = image_player_type.get_height()
@@ -51,7 +53,7 @@ player_ratio = player_width/player_height
 player_width = SCREEN_HEIGHT/6 * player_ratio
 player_height = SCREEN_HEIGHT/6
 
-
+# blobby good
 player_image_good = []
 player_image_good.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_good_1.png").convert_alpha(), (player_width, player_height)))
 player_image_good.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_good_2.png").convert_alpha(), (player_width, player_height)))
@@ -61,8 +63,6 @@ player_image_good.append(pygame.transform.scale(pygame.image.load("img/blobby/bl
 
         
 # blobby bad
-
-
 player_image_bad = []
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_1.png").convert_alpha(), (player_width, player_height)))
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_2.png").convert_alpha(), (player_width, player_height)))
@@ -81,30 +81,6 @@ building_witdh = 3*SCREEN_HEIGHT/5 * building_ratio
 building_height = 3*SCREEN_HEIGHT/4
 building_image = pygame.transform.scale(building_image, (building_witdh, building_height))
 
-# # Consumables carrot
-# consumable_carrot_list = []
-# consumable_carrot_list.append(pygame.image.load("img/consumables/carrot/carrot1.png").convert_alpha())
-# consumable_carrot_list.append(pygame.image.load("img/consumables/carrot/carrot2.png").convert_alpha())
-# consumable_carrot_list.append(pygame.image.load("img/consumables/carrot/carrot3.png").convert_alpha())
-# consumable_carrot_list.append(pygame.image.load("img/consumables/carrot/carrot4.png").convert_alpha())
-# consumable_carrot_list.append(pygame.image.load("img/consumables/carrot/carrot5.png").convert_alpha())
-# consumable_carrot_list.append(pygame.image.load("img/consumables/carrot/carrot6.png").convert_alpha())
-# consumable_carrot_list.append(pygame.image.load("img/consumables/carrot/carrot7.png").convert_alpha())
-# consumable_carrot_list.append(pygame.image.load("img/consumables/carrot/carrot8.png").convert_alpha())
-
-# # Consumables soda
-# consumable_soda_list = []
-# consumable_soda_list.append(pygame.image.load("img/consumables/soda/soda1.png").convert_alpha())
-# consumable_soda_list.append(pygame.image.load("img/consumables/soda/soda2.png").convert_alpha())
-# consumable_soda_list.append(pygame.image.load("img/consumables/soda/soda3.png").convert_alpha())
-# consumable_soda_list.append(pygame.image.load("img/consumables/soda/soda4.png").convert_alpha())
-# consumable_soda_list.append(pygame.image.load("img/consumables/soda/soda5.png").convert_alpha())
-# consumable_soda_list.append(pygame.image.load("img/consumables/soda/soda6.png").convert_alpha())
-# consumable_soda_list.append(pygame.image.load("img/consumables/soda/soda7.png").convert_alpha())
-# consumable_soda_list.append(pygame.image.load("img/consumables/soda/soda8.png").convert_alpha())
-
-
-
 # Carrot
 consumable_soda_img = pygame.image.load("img/consumables/carrot/carrot1.png").convert_alpha()
 consumable_soda_width = consumable_soda_img.get_width()
@@ -122,25 +98,3 @@ consumable_carrot_ratio = consumable_carrot_width/consumable_carrot_height
 consumable_carrot_width = SCREEN_HEIGHT/8 * consumable_carrot_ratio
 consumable_carrot_height = SCREEN_HEIGHT/8
 consumable_carrot_img = pygame.transform.scale(consumable_carrot_img, (consumable_carrot_width, consumable_carrot_height))
-
-
-
-
-
-
-
-
-# consumables_good_witdh = consumables_good_image.get_width()
-# consumables_good_height = consumables_good_image.get_height()
-# consumables_good_ratio = consumables_good_witdh/consumables_good_height
-# consumables_good_witdh = SCREEN_HEIGHT/8 * consumables_good_ratio
-# consumables_good_height = SCREEN_HEIGHT/8
-# consumables_good_image = pygame.transform.scale(consumables_good_image, (consumables_good_witdh, consumables_good_height))
-
-
-# consumables_bad_witdh = consumables_bad_image.get_width()
-# consumables_bad_height = consumables_bad_image.get_height()
-# consumables_bad_ratio = consumables_bad_witdh/consumables_bad_height
-# consumables_bad_witdh = SCREEN_HEIGHT/8 * consumables_bad_ratio
-# consumables_bad_height = SCREEN_HEIGHT/8
-# consumables_bad_image = pygame.transform.scale(consumables_bad_image, (consumables_bad_witdh, consumables_bad_height))

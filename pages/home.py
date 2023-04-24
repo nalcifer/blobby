@@ -20,3 +20,11 @@ def home(font):
             if event.type == pygame.QUIT:
                 run = True
         pygame.display.flip()
+
+
+
+
+
+
+
+        # Je sais pas : Dorian si tu pouvais mettre des commentaires explicatifs stp :) 
