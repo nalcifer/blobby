@@ -9,7 +9,9 @@ from pages.home import *
 
 # Class principales pour le jeu
 background = Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed)
-player = Player(player_image , player_width, player_height)
+
+current_player_sprite_good = 0
+
 
 class Game:
   # Initialisation de la fênetre et de la boucle
@@ -19,24 +21,44 @@ class Game:
 
   def var(self):
     self.clock = pygame.time.Clock()
-    self.player = Player(player_image , player_width, player_height)
+    self.current_player_image = current_player_sprite_good
     self.background = Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed)
     self.prev_time = time.time()
 
-# début problème
+    self.time_between_animation = 0
+    self.player_level = 4
+    self.move_y = player_height
+    self.number_sprite = 0
+
     self.objectInMouse = []
     self.lenObjectInMouse = len(self.objectInMouse)
+
+  def animation(self, list_anim, current_image, deltatime, y, time = 0.2):
+      if time >= 0.2:
+        self.number_sprite = (self.number_sprite + 1) % len(list_anim)
+        current_image = list_anim[self.number_sprite]
+        time = 0
+      self.player = Player(current_image , player_width, y)
+      self.player.initPlayer()
+      time += deltatime
+
+# début problème
+  
 # fin problème
+
 
   # Fonction pour la boucle principale
   def run(self):
     while self.running:
       redrawWindow()
 
+
       self.clock.tick(FPS)# DeltaTime
       self.now = time.time()
       self.dt = self.now - self.prev_time
       self.prev_time = self.now
+
+
 
       for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -48,14 +70,10 @@ class Game:
           if obstacle == 0:
             obstacles.append(Object(building_image ,SCREEN_WIDTH, SCREEN_HEIGHT/2, collide = True, good = False))
           elif obstacle == 1:
-            obstacles.append(Object(consumables_bad_image ,SCREEN_WIDTH, random.randrange(100000) % ( SCREEN_HEIGHT - consumables_bad_height) , collide = False, good = False))
+            obstacles.append(Object(consumable_soda_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_soda_height), collide = False, good = True))
           elif obstacle == 2:
-            obstacles.append(Object(consumables_good_image ,SCREEN_WIDTH, random.randrange(100000) % ( SCREEN_HEIGHT - consumables_good_height),  collide = False, good = True)) 
+            obstacles.append(Object(consumable_carrot_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_carrot_height),  collide = False, good = False)) 
         
-        # objects = random.randrange(0,100)
-        # if objects == 0:
-        #   layerss.append(Layers(building_image ,SCREEN_WIDTH, SCREEN_HEIGHT/3))
-
       # Déplacement du background en fonction du delta time 
       for bgs in bg: 
         bgs.posX = ( bgs.posX + (bg_speed * self.dt) ) % (SCREEN_HEIGHT * bg1_ratio)
@@ -134,9 +152,11 @@ class Game:
       keyPlayer = pygame.key.get_pressed()
       for player in players:
         if keyPlayer[pygame.K_UP] and self.player.rect.y > 0:
-          player.y -= self.player.speed * self.dt
+          self.move_y -= self.player.speed * self.dt
         if keyPlayer[pygame.K_DOWN] and self.player.rect.y < (SCREEN_HEIGHT - 218):
-          player.y += self.player.speed * self.dt
+          self.move_y += self.player.speed * self.dt
+      
+      self.animation(player_image_good, self.current_player_image, self.dt, self.move_y)
        
       pygame.display.flip()
       pygame.display.update()

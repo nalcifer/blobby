@@ -13,5 +13,5 @@ class Object:
 
 
     def draw(self):
-        screen.blit(self.img, (self.posX,self.posY))
+        screen.blit(self.img, (self.posX, self.posY))
         self.rect = self.img.get_rect(x = self.posX, y = self.posY)
