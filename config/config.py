@@ -19,7 +19,7 @@ event2 = pygame.USEREVENT+2
 pygame.time.set_timer(event1, 100)
 pygame.time.set_timer(event2, 3000)
 
-pygame.time.set_timer(event2, random.randrange(1500, 2000)) # Will trigger every 2 - 3.5 seconds
+pygame.time.set_timer(event2, random.randrange(500, 800)) # Will trigger every 2 - 3.5 seconds
 
 
 # ------- LOAD IMG --------

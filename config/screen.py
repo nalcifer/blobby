@@ -19,10 +19,10 @@ def redrawWindow():
        bgs.drawBg()
     for objects in layerss:
         objects.draw()
-    for obstacle in obstacles:
-        obstacle.draw()
     for objectCaught in objectsCaught:
         objectCaught.draw()
+    for obstacle in obstacles:
+        obstacle.draw()
     for player in players:
         player.draw()
     pygame.display.update()
