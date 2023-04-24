@@ -69,14 +69,16 @@ class Game:
         if obstacle.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
           obstacles.pop(obstacles.index(obstacle))
         if pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == True:
-          pygame.quit()
+          HEALTH -= 1
+        if HEALTH <= 0:
+            run = False
         elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == False:
           if self.player_level > 0:
             print("bad")
             self.player_level -= 1
             self.player.speed /= 1.2
           elif self.player_level >= 0:
-            print("bad")
+            print("bad") 
             self.player_level -= 1
           obstacles.pop(obstacles.index(obstacle))
           
