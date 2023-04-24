@@ -60,17 +60,18 @@ class Game:
       for bgs in bg: 
         bgs.posX = ( bgs.posX + (bg_speed * self.dt) ) % (SCREEN_HEIGHT * bg1_ratio)
       
-
+      # Spawn des objets
       for objects in layerss: 
         objects.posX -= self.dt * (bg_speed * 2) 
-        if objects.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
+        if objects.posX < ( - SCREEN_WIDTH) : # If our object is off the screen we will remove it
           layerss.pop(layerss.index(objects))
 
-        # Contrôle du joueur
-      for obstacle in obstacles: 
+      # Spawn des obstacles
+      for obstacle in obstacles:
         obstacle.posX -= self.dt * speed_level 
         if obstacle.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
           obstacles.pop(obstacles.index(obstacle))
+          
 # début problème
         if pygame.Rect.colliderect(obstacle.rect, player.rect) == True :
           # Si c'est un obstacle mortel alors fin de la partie
