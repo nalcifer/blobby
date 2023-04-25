@@ -32,6 +32,7 @@ class Game:
     self.player_level = 4
     self.move_y = player_height
     self.number_sprite = 0
+    self.time_between_frame = 0
 
     # Variables pour avaler recracher
     self.objectInMouse = []
@@ -39,13 +40,12 @@ class Game:
 
 
   # Fonction pour les animations ( qui marche pas très bien pour le delay )  --> a corriger
-  def animation(self, list_anim, current_image, deltatime, y, time = 0.2):
-      if time >= 0.2:
-        self.number_sprite = (self.number_sprite + 1) % len(list_anim)
-        current_image = list_anim[self.number_sprite]
-        time = 0
+  def animation(self, list_anim, current_image, deltatime, y, time):
+      self.number_sprite = (self.number_sprite + 1) % len(list_anim)
+      current_image = list_anim[self.number_sprite]
+      time = 0
       self.player = Player(current_image , player_width, y)
-      self.player.initPlayer()
+      self.player.update()
       time += deltatime
 
 
@@ -143,11 +143,14 @@ class Game:
       for player in players:
         if keyPlayer[pygame.K_UP] and self.player.rect.y > 0:
           self.move_y -= self.player.speed * self.dt
-        if keyPlayer[pygame.K_DOWN] and self.player.rect.y < (SCREEN_HEIGHT - 218):
+        if keyPlayer[pygame.K_DOWN] and self.player.rect.y < (SCREEN_HEIGHT - player_height * 2):
           self.move_y += self.player.speed * self.dt
       
 
-      # Animation du Blobby (idle)
-      self.animation(player_image_good, self.current_player_image, self.dt, self.move_y)
+      # # Animation du Blobby (idle)
+      # self.time_between_frame += self.dt
+      # if self.time_between_frame >= 0.2:
+      self.animation(player_image_good, self.current_player_image, self.dt, self.move_y, self.time_between_frame)
+        # self.time_between_frame = 0
 
       pygame.display.update()

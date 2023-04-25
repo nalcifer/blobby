@@ -17,8 +17,9 @@ class Player:
         screen.blit(self.img, (self.x, self.y))
         self.rect = self.img.get_rect(x=self.x, y=self.y)
 
+
     # Fonction pour initialiser Blobby
-    def initPlayer(self):
+    def update(self):
         if len(players)!= 0:
             del players[0]
         players.append(Player(self.img, self.x, self.y))

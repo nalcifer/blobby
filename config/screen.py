@@ -17,7 +17,6 @@ objectsCaught = []
 players = []
 def redrawWindow(bg):
     bg.drawBg()
-    
     for objectCaught in objectsCaught:
         objectCaught.draw()
     for obstacle in obstacles:
