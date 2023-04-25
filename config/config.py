@@ -26,7 +26,7 @@ pygame.time.set_timer(event2, random.randrange(500, 800)) # Will trigger every 2
 
 # ------- LOAD IMG --------
 # background
-bg1_image = pygame.image.load("img/layer 1.png").convert_alpha()
+bg1_image = pygame.image.load("img/layer 1.png").convert()
 bg1_width = bg1_image.get_width()
 bg1_height = bg1_image.get_height()
 bg1_ratio = bg1_width/bg1_height
@@ -78,9 +78,17 @@ building_image = pygame.image.load("img/batiment 1.png").convert_alpha()
 building_witdh = building_image.get_width()
 building_height = building_image.get_height()
 building_ratio = building_witdh/building_height
-building_witdh = 3*SCREEN_HEIGHT/5 * building_ratio
-building_height = 3*SCREEN_HEIGHT/4
+building_witdh = SCREEN_HEIGHT/2 * building_ratio
+building_height = SCREEN_HEIGHT/2
 building_image = pygame.transform.scale(building_image, (building_witdh, building_height))
+
+building_image_two = pygame.image.load("img/batiment 2.png").convert_alpha()
+building_witdh_two = building_image_two.get_width()
+building_height_two = building_image_two.get_height()
+building_ratio_two = building_witdh_two/building_height_two
+building_witdh_two = 3*SCREEN_HEIGHT/5 * building_ratio_two
+building_height_two = 3*SCREEN_HEIGHT/5
+building_image_two = pygame.transform.scale(building_image_two, (building_witdh_two, building_height_two))
 
 # Carrot
 consumable_soda_img = pygame.image.load("img/consumables/carrot/carrot1.png").convert_alpha()

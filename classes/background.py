@@ -14,7 +14,10 @@ class Background :
         self.screenHeight = screenHeight
         self.translateX = translateX
         
-        self.nbr_bg = round(( SCREEN_WIDTH * 3 ) / bg1_width) + 1
+        self.nbr_bg = int( SCREEN_WIDTH * 3 / bg1_width) + 1
+
+    def update(self, dt):
+        self.posX = ( self.posX + (self.speed * dt) ) % (SCREEN_HEIGHT * bg1_ratio)
 
     # Fonction pour dessiner le background
     def drawBg(self) :
@@ -24,10 +27,3 @@ class Background :
             screen.blit(self.img1, (posXtemp + (posXtemp + (i * SCREEN_HEIGHT * bg1_ratio)), self.posY))
             screen.blit(self.img2, (posXtemp + (posXtemp + (i * SCREEN_HEIGHT * bg1_ratio)), self.posY))
             screen.blit(self.img3, (posXtemp + (posXtemp + (i * SCREEN_HEIGHT * bg1_ratio)), self.posY))
-            
-    # Fonction pour initialiser le Background
-    def initbg(self):
-        for i in range(self.nbr_bg):
-            bg.append(Background(self.img1, self.img2, self.img3, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
-            bg.append(Background(self.img1, self.img2, self.img3, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
-            bg.append(Background(self.img1, self.img2, self.img3, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed))
