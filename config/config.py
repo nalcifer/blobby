@@ -21,7 +21,7 @@ event2 = pygame.USEREVENT+2
 pygame.time.set_timer(event1, 100)
 pygame.time.set_timer(event2, 3000)
 
-pygame.time.set_timer(event2, random.randrange(500, 800)) # Will trigger every 2 - 3.5 seconds
+pygame.time.set_timer(event2, random.randrange(500, 800)) 
 
 
 # ------- LOAD IMG --------
@@ -61,6 +61,17 @@ player_image_good.append(pygame.transform.scale(pygame.image.load("img/blobby/bl
 player_image_good.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_good_4.png").convert_alpha(), (player_width, player_height)))
 player_image_good.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_good_5.png").convert_alpha(), (player_width, player_height)))
 
+# animation
+player_image_good_anim = []
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 1.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 2.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 3.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 4.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 5.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 6.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 7.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 8.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 9.png").convert_alpha(), (player_width, player_height)))
         
         
 # blobby bad
@@ -69,9 +80,20 @@ player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blo
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_2.png").convert_alpha(), (player_width, player_height)))
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_3.png").convert_alpha(), (player_width, player_height)))
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_4.png").convert_alpha(), (player_width, player_height)))
-player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_good_5.png").convert_alpha(), (player_width, player_height)))
+player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_5.png").convert_alpha(), (player_width, player_height)))
 
-
+# animation
+player_image_bad_anim = []
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 1.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 2.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 3.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 4.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 5.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 6.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 7.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 8.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 9.png").convert_alpha(), (player_width, player_height)))
+   
 
 # fixed object
 building_image = pygame.image.load("img/batiment 1.png").convert_alpha()
