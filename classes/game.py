@@ -53,12 +53,13 @@ class Game:
   def run(self):
     while self.running:
       # config.screen
-      redrawWindow()
+      redrawWindow(background)
 
       # Boucle pour calculer le delta time (temps entre deux frames)
-      self.clock.tick(FPS)
+      # self.clock.tick(FPS)
       self.now = time.time()
       self.dt = self.now - self.prev_time
+      print("fps:" + str(1/self.dt))
       self.prev_time = self.now
 
 
@@ -69,21 +70,22 @@ class Game:
           pygame.quit()
           run = False
 
+
         # events défini dans : config.config
         # boucle pour définir le spawn aléatoire de batiments et de consommables
         if event.type == event2:
           obstacle = random.randrange(0,10)
           if obstacle == 0:
-            obstacles.append(Object(building_image ,SCREEN_WIDTH, SCREEN_HEIGHT/2, collide = True, good = False))
+            obstacles.append(Object(building_image ,SCREEN_WIDTH, 6*SCREEN_HEIGHT/14, collide = True, good = False))
           elif obstacle == 1:
-            obstacles.append(Object(consumable_soda_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_soda_height), collide = False, good = True))
+            obstacles.append(Object(consumable_soda_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_soda_height * 2), collide = False, good = True))
           elif obstacle == 2:
-            obstacles.append(Object(consumable_carrot_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_carrot_height),  collide = False, good = False)) 
-        
+            obstacles.append(Object(consumable_carrot_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_carrot_height * 2),  collide = False, good = False)) 
+          if obstacle == 3:
+            obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 3*SCREEN_HEIGHT/11, collide = True, good = False))
+
       # Déplacement du background en fonction du delta time 
-      for bgs in bg: 
-        bgs.posX = ( bgs.posX + (bg_speed * self.dt) ) % (SCREEN_HEIGHT * bg1_ratio)
-      
+      background.update(self.dt)
 
       # Spawn des obstacles et des consommables
       for obstacle in obstacles:
@@ -147,6 +149,5 @@ class Game:
 
       # Animation du Blobby (idle)
       self.animation(player_image_good, self.current_player_image, self.dt, self.move_y)
-      
-      pygame.display.flip()
+
       pygame.display.update()
