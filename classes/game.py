@@ -24,11 +24,15 @@ class Game:
     self.background = Background(bg1_image,bg2_image,bg3_image, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, bg_speed)
     self.prev_time = time.time()
     self.player_level = 4
+    self.HEALTH = 3
+    self.damage = 1
 
   # Fonction pour la boucle principale
   def run(self):
     while self.running:
       redrawWindow()
+      for i in range(self.HEALTH):
+        screen.blit(HEALTH_IMAGE, (10 + (i * 40), 10))
 
       self.clock.tick(FPS)# DeltaTime
       self.now = time.time()
@@ -69,10 +73,13 @@ class Game:
         if obstacle.posX < ( - SCREEN_WIDTH) : # If our obstacle is off the screen we will remove it
           obstacles.pop(obstacles.index(obstacle))
         if pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == True:
-          HEALTH -= 1
-        if HEALTH <= 0:
-            run = False
+            pygame.quit()
+
+
         elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == False:
+          self.HEALTH -= self.damage 
+          if self.HEALTH <= 0 :
+            pygame.quit()
           if self.player_level > 0:
             print("bad")
             self.player_level -= 1
@@ -83,6 +90,7 @@ class Game:
           obstacles.pop(obstacles.index(obstacle))
           
         elif pygame.Rect.colliderect(obstacle.rect, player.rect) == True and obstacle.collide == False and obstacle.good == True:
+          self.HEALTH += 1 
           if self.player_level < 7:
             print("good")
             self.player_level += 1

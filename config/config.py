@@ -42,7 +42,11 @@ bg3_height = bg3_image.get_height()
 bg3_ratio = bg3_width/bg3_height
 bg3_image = pygame.transform.scale(bg3_image, ((SCREEN_HEIGHT * bg3_ratio), SCREEN_HEIGHT))
 
-
+# heart
+HEALTH_IMAGE = pygame.image.load("img/heart.png").convert_alpha()
+HEALTH_width = 30
+HEALTH_height = 30
+HEALTH_IMAGE = pygame.transform.scale(HEALTH_IMAGE, (HEALTH_width, HEALTH_height))
 
 
 # tree
