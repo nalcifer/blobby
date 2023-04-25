@@ -5,6 +5,7 @@ from classes.background import *
 from classes.object import *
 from config.config import *
 from pages.home import *
+from pages.score import *
 
 
 
@@ -50,7 +51,8 @@ class Game:
 
 
   # Fonction pour la boucle principale
-  def run(self):
+  def run(self, run):
+    score = 0
     while self.running:
       # config.screen
       redrawWindow(background)
@@ -61,7 +63,6 @@ class Game:
       self.dt = self.now - self.prev_time
       print("fps:" + str(1/self.dt))
       self.prev_time = self.now
-
 
       # Boucle de gestion des evenements
       for event in pygame.event.get():
@@ -87,6 +88,12 @@ class Game:
       # Déplacement du background en fonction du delta time 
       background.update(self.dt)
 
+
+      score +=1
+      Score(font, score)
+      if run == False:
+        return score
+      
       # Spawn des obstacles et des consommables
       for obstacle in obstacles:
         obstacle.posX -= self.dt * speed_level 
@@ -97,7 +104,7 @@ class Game:
         if pygame.Rect.colliderect(obstacle.rect, player.rect) == True :
           # Si c'est un objet mortel alors fin de la partie
           if obstacle.collide == True :
-            pygame.quit()
+            run = False
           
           # Si c'est un objet commestible, le joueur le prend dans sa bouche
           elif obstacle.collide == False and len(self.objectInMouse) == 0:
@@ -122,10 +129,8 @@ class Game:
           if keyPlayer[pygame.K_SPACE]:
             if objects.good == False:
               self.objectInMouse.pop(self.objectInMouse.index(objects))
-              
             elif objects.good == True:
               self.objectInMouse.pop(self.objectInMouse.index(objects))
-
           # Recracher
           elif keyPlayer[pygame.K_RSHIFT] :
             objectsCaught.append(objects)
