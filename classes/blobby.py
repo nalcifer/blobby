@@ -22,3 +22,4 @@ class Player:
         if len(players)!= 0:
             del players[0]
         players.append(Player(self.img, self.x, self.y))
+        

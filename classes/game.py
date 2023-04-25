@@ -119,25 +119,25 @@ class Game:
           # Avaler
           if keyPlayer[pygame.K_SPACE]:
             if objects.good == True and self.player_level < 7 and self.player_level != 0:
-              print("aaa")
               self.player_level += 1
               self.player.speed *= 10
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
             elif objects.good == True and self.player_level == 7:
-              print("bbb")
               self.player_level += 1
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
             elif objects.good == True and self.player_level == 1:
-              print("ccc")
               self.player_level += 1
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
             if objects.good == False and self.player_level > 1 and self.player_level != 7:
-              print("aaa")
               self.player_level -= 1 
               self.player.speed /= 10
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
             elif objects.good == False and self.player_level == 1:
-              print("bbb")
               self.player_level -= 1
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
             elif objects.good == False and self.player_level == 7:
-              print("ccc")
               self.player_level -= 1
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
 
           # Recracher
           elif keyPlayer[pygame.K_RSHIFT] :
@@ -153,7 +153,16 @@ class Game:
         objects.posX += self.dt * ( bg_speed * 2 ) 
         if objects.posX >  SCREEN_WIDTH : 
           objectsCaught.pop(objectsCaught.index(objects))
+
+      # Animation du Blobby (idle)         
+      if self.player_level >= 4:
+        self.animation(player_image_good, self.current_player_image, self.dt, self.move_y)
+      elif self.player_level < 4:
+        self.animation(player_image_bad, self.current_player_image, self.dt, self.move_y)
+
           
+
+
 
       
       # Contrôle du joueur
@@ -165,8 +174,6 @@ class Game:
           self.move_y += self.player.speed * self.dt
       
 
-      # Animation du Blobby (idle)
-      self.animation(player_image_good, self.current_player_image, self.dt, self.move_y)
       
       pygame.display.flip()
       pygame.display.update()

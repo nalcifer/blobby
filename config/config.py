@@ -50,8 +50,8 @@ image_player_type = pygame.image.load("img/blobby/blobby_bad_1.png").convert_alp
 player_width = image_player_type.get_width()
 player_height = image_player_type.get_height()
 player_ratio = player_width/player_height
-player_width = SCREEN_HEIGHT/6 * player_ratio
-player_height = SCREEN_HEIGHT/6
+player_width = 2*SCREEN_HEIGHT/11 * player_ratio
+player_height = 2*SCREEN_HEIGHT/11
 
 # blobby good
 player_image_good = []
@@ -68,7 +68,7 @@ player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blo
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_2.png").convert_alpha(), (player_width, player_height)))
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_3.png").convert_alpha(), (player_width, player_height)))
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_4.png").convert_alpha(), (player_width, player_height)))
-player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_good_5.png").convert_alpha(), (player_width, player_height)))
+player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_5.png").convert_alpha(), (player_width, player_height)))
 
 
 
@@ -86,8 +86,8 @@ consumable_soda_img = pygame.image.load("img/consumables/carrot/carrot1.png").co
 consumable_soda_width = consumable_soda_img.get_width()
 consumable_soda_height = consumable_soda_img.get_height()
 consumable_soda_ratio = consumable_soda_width/consumable_soda_height
-consumable_soda_width = SCREEN_HEIGHT/8 * consumable_soda_ratio
-consumable_soda_height = SCREEN_HEIGHT/8
+consumable_soda_width = SCREEN_HEIGHT/6 * consumable_soda_ratio
+consumable_soda_height = SCREEN_HEIGHT/6
 consumable_soda_img = pygame.transform.scale(consumable_soda_img, (consumable_soda_width, consumable_soda_height))
 
 # Soda
@@ -95,6 +95,6 @@ consumable_carrot_img = pygame.image.load("img/consumables/soda/soda1.png").conv
 consumable_carrot_width = consumable_carrot_img.get_width()
 consumable_carrot_height = consumable_carrot_img.get_height()
 consumable_carrot_ratio = consumable_carrot_width/consumable_carrot_height
-consumable_carrot_width = SCREEN_HEIGHT/8 * consumable_carrot_ratio
-consumable_carrot_height = SCREEN_HEIGHT/8
+consumable_carrot_width = SCREEN_HEIGHT/6 * consumable_carrot_ratio
+consumable_carrot_height = SCREEN_HEIGHT/6
 consumable_carrot_img = pygame.transform.scale(consumable_carrot_img, (consumable_carrot_width, consumable_carrot_height))
