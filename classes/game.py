@@ -89,17 +89,17 @@ class Game:
             bird_spawn = (SCREEN_HEIGHT / 40) + (random_spawn * SCREEN_HEIGHT / 6 )
             ennemies.append(Ennemies(ennemie_image_bird, SCREEN_WIDTH, bird_spawn))
 
-      if event.type == event3:
-          background.speed += 50
-          self.player.speed +=50
-          self.speed_level += 20
-          if background.speed == 1050:
-            background.speed -= 50
-          if self.player.speed == 1300:
-            self.player.speed -= 50
-          if self.speed_level == 420:
-            self.speed_level -= 20
-          background.update(self.dt)
+        if event.type == event3:
+            background.speed += 50
+            self.player.speed +=50
+            self.speed_level += 20
+            if background.speed == 1050:
+              background.speed -= 50
+            if self.player.speed == 1300:
+              self.player.speed -= 50
+            if self.speed_level == 420:
+              self.speed_level -= 20
+            background.update(self.dt)
 
       # Déplacement du background en fonction du delta time 
       background.update(self.dt)
