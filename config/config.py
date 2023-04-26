@@ -4,7 +4,6 @@ from config.screen import *
 # Variables "globales"
 FPS = 60
 bg_speed = 50
-speed_level = 200
 
 # Initialisation des manettes
 pygame.joystick.init()

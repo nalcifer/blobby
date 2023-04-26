@@ -36,6 +36,7 @@ class Game:
     self.time_between_frame = 0
     self.player = Player(player_image_good, player_image_bad, player_image_good_anim, player_image_bad_anim, player_width, player_height)
     self.anime_eat = False
+    self.speed_level = 200
 
     # Variables pour avaler recracher
     self.objectInMouse = []
@@ -112,16 +113,19 @@ class Game:
 
       # Déplacement des ennemies 
       for ennemie in ennemies: 
-        ennemie.posX -= self.dt * speed_level
+        ennemie.posX -= self.dt * self.speed_level
         if ennemie.posX < (- SCREEN_WIDTH) :
           ennemies.pop(ennemies.index(ennemie))
         if pygame.Rect.colliderect(ennemie.rect, self.player.rect) == True:
             self.player_level = 4
+            background.speed = 50
+            self.player.speed = 250
+            self.speed_level = 200
             run = False
 
       # Spawn des obstacles et des consommables
       for obstacle in obstacles:
-        obstacle.posX -= self.dt * speed_level 
+        obstacle.posX -= self.dt * self.speed_level 
         if obstacle.posX < ( - SCREEN_WIDTH) :
           obstacles.pop(obstacles.index(obstacle))
         
@@ -130,6 +134,9 @@ class Game:
           # Si c'est un objet mortel alors fin de la partie
           if obstacle.collide == True :
             self.player_level = 4
+            background.speed = 50
+            self.player.speed = 250
+            self.speed_level = 200
             run = False
           
           
@@ -166,7 +173,7 @@ class Game:
           if keyPlayer[pygame.K_SPACE]:
             if objects.good == True and self.player_level < 7 and self.player_level != 0:
               self.player_level += 1
-              self.player.speed *= 1.5
+              self.player.speed *= 1.3
               self.objectInMouse.pop(self.objectInMouse.index(objects))
             elif objects.good == True and self.player_level == 7:
               self.player_level += 1
@@ -179,7 +186,7 @@ class Game:
               
             if objects.good == False and self.player_level > 1 and self.player_level != 7:
               self.player_level -= 1 
-              self.player.speed /= 1.5
+              self.player.speed /= 1.3
               self.objectInMouse.pop(self.objectInMouse.index(objects))
             elif objects.good == False and self.player_level == 1:
               self.player_level -= 1
