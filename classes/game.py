@@ -77,13 +77,13 @@ class Game:
         if event.type == event2:
           obstacle = random.randrange(0,20)
           if obstacle == 0:
-            obstacles.append(Object(building_image ,SCREEN_WIDTH, 5*SCREEN_HEIGHT/11, collide = True, good = False))
+            obstacles.append(Object(building_image ,SCREEN_WIDTH, 5*SCREEN_HEIGHT/11, collide = True, good = False, height = 120, width = 180))
           elif obstacle <= 3 and obstacle > 0:
             obstacles.append(Object(consumable_soda_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_soda_height * 2), collide = False, good = True))
           elif obstacle <= 6 and obstacle > 3:
             obstacles.append(Object(consumable_carrot_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_carrot_height * 2),  collide = False, good = False)) 
           elif obstacle == 7:
-            obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 1*SCREEN_HEIGHT/3, collide = True, good = False))
+            obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 1*SCREEN_HEIGHT/3, collide = True, good = False, height = 200, width = 200))
           elif obstacle == 8 or obstacle == 9:
             random_spawn = random.randrange(3)
             bird_spawn = (SCREEN_HEIGHT / 40) + (random_spawn * SCREEN_HEIGHT / 6 )
