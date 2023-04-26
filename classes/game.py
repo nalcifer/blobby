@@ -5,6 +5,7 @@ from classes.background import *
 from classes.object import *
 from config.config import *
 from pages.home import *
+from pages.score import *
 from classes.ennemies import *
 
 
@@ -42,7 +43,8 @@ class Game:
       
 
   # Fonction pour la boucle principale
-  def run(self):
+  def run(self, run):
+    score=0
     while self.running:
       
       # Boucle pour calculer le delta time (temps entre deux frames)
@@ -90,13 +92,18 @@ class Game:
       # Déplacement du background en fonction du delta time 
       background.update(self.dt)
 
+      score +=1
+      Score(font52, score)
+      if run == False:
+        return score
+
       # Déplacement des ennemies 
       for ennemie in ennemies: 
         ennemie.posX -= self.dt * speed_level
         if ennemie.posX < (- SCREEN_WIDTH) :
           ennemies.pop(ennemies.index(ennemie))
         if pygame.Rect.colliderect(ennemie.rect, self.player.rect) == True:
-            pygame.quit() 
+            run = False
 
       # Spawn des obstacles et des consommables
       for obstacle in obstacles:
@@ -108,7 +115,7 @@ class Game:
         if pygame.Rect.colliderect(obstacle.rect, self.player.rect) == True :
           # Si c'est un objet mortel alors fin de la partie
           if obstacle.collide == True :
-            pygame.quit()
+            run = False
           
           
           # Si c'est un objet commestible, le joueur le prend dans sa bouche
