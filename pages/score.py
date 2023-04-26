@@ -5,8 +5,9 @@ pygame.font.init()
 
 #affiche le score durant la partie
 def Score(font, score):
-    my_text = font.render('Score = '+ str(score), True, 'Black')
-    screen.blit(my_text, (0,0))
+    my_text = font.render(str(score), True, 'Black')
+    my_text_height = my_text.get_height()
+    screen.blit(my_text, ( SCREEN_WIDTH / 8, SCREEN_HEIGHT - 1.2 * my_text_height))
     pygame.display.flip()
 
 #affiche une fenetre en fin de partie avec le score et permettant de rejouer ou de quitter
@@ -44,6 +45,7 @@ def EndScore(font52,font100, score, best):
             ennemies.clear()
             obstacles.clear()
             objectsCaught.clear()
+            player_level = 4
             return True
         if keyPlayer[pygame.K_q] :
             #arrete la partie si on appuie sur q

@@ -62,7 +62,7 @@ class Game:
       else: 
         self.anime_eat = False
       redrawWindow(background, self.player, self.dt, self.player_level, self.anime_eat)
-      screen.blit(pollution_image[self.player_level], (SCREEN_WIDTH / 2 - 0.5 * pollution_level_witdh,   pollution_level_height))
+      screen.blit(pollution_image[self.player_level], (3 * SCREEN_WIDTH / 4 - 0.5 * pollution_level_witdh,   SCREEN_HEIGHT - 1.5 * pollution_level_height))
 
       # Boucle de gestion des evenements
       for event in pygame.event.get():
@@ -107,6 +107,7 @@ class Game:
       score +=1
       Score(font52, score)
       if run == False:
+        self.player_level = 4
         return score
 
       # Déplacement des ennemies 
@@ -115,6 +116,7 @@ class Game:
         if ennemie.posX < (- SCREEN_WIDTH) :
           ennemies.pop(ennemies.index(ennemie))
         if pygame.Rect.colliderect(ennemie.rect, self.player.rect) == True:
+            self.player_level = 4
             run = False
 
       # Spawn des obstacles et des consommables
@@ -127,6 +129,7 @@ class Game:
         if pygame.Rect.colliderect(obstacle.rect, self.player.rect) == True :
           # Si c'est un objet mortel alors fin de la partie
           if obstacle.collide == True :
+            self.player_level = 4
             run = False
           
           
