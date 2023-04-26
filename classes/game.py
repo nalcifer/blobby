@@ -5,6 +5,7 @@ from classes.background import *
 from classes.object import *
 from config.config import *
 from pages.home import *
+from classes.ennemies import *
 
 
 
@@ -30,37 +31,35 @@ class Game:
     self.current_player_image = current_player_sprite_good
     self.time_between_animation = 0
     self.player_level = 4
-    self.move_y = player_height
     self.number_sprite = 0
+    self.time_between_frame = 0
+    self.player = Player(player_image_good, player_image_bad, player_image_good_anim, player_image_bad_anim, player_width, player_height)
+    self.anime_eat = False
 
     # Variables pour avaler recracher
     self.objectInMouse = []
     self.lenObjectInMouse = len(self.objectInMouse)
-
-
-  # Fonction pour les animations ( qui marche pas très bien pour le delay )  --> a corriger
-  def animation(self, list_anim, current_image, deltatime, y, time = 0.2):
-      if time >= 0.2:
-        self.number_sprite = (self.number_sprite + 1) % len(list_anim)
-        current_image = list_anim[self.number_sprite]
-        time = 0
-      self.player = Player(current_image , player_width, y)
-      self.player.initPlayer()
-      time += deltatime
-
+      
 
   # Fonction pour la boucle principale
   def run(self):
     while self.running:
-      # config.screen
-      redrawWindow(background)
-
+      
       # Boucle pour calculer le delta time (temps entre deux frames)
       # self.clock.tick(FPS)
       self.now = time.time()
       self.dt = self.now - self.prev_time
-      print("fps:" + str(1/self.dt))
+      # print("fps:" + str(1/self.dt))
       self.prev_time = self.now
+
+
+      # config.screen
+      # Redessine les objets de la scene
+      if len(self.objectInMouse) != 0:
+        self.anime_eat = True
+      else: 
+        self.anime_eat = False
+      redrawWindow(background, self.player, self.dt, self.player_level, self.anime_eat)
 
 
       # Boucle de gestion des evenements
@@ -74,46 +73,69 @@ class Game:
         # events défini dans : config.config
         # boucle pour définir le spawn aléatoire de batiments et de consommables
         if event.type == event2:
-          obstacle = random.randrange(0,10)
+          obstacle = random.randrange(0,20)
           if obstacle == 0:
-            obstacles.append(Object(building_image ,SCREEN_WIDTH, 6*SCREEN_HEIGHT/14, collide = True, good = False))
-          elif obstacle == 1:
+            obstacles.append(Object(building_image ,SCREEN_WIDTH, 5*SCREEN_HEIGHT/11, collide = True, good = False))
+          elif obstacle <= 3 and obstacle > 0:
             obstacles.append(Object(consumable_soda_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_soda_height * 2), collide = False, good = True))
-          elif obstacle == 2:
+          elif obstacle <= 6 and obstacle > 3:
             obstacles.append(Object(consumable_carrot_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_carrot_height * 2),  collide = False, good = False)) 
-          if obstacle == 3:
-            obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 3*SCREEN_HEIGHT/11, collide = True, good = False))
+          elif obstacle == 7:
+            obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 1*SCREEN_HEIGHT/3, collide = True, good = False))
+          elif obstacle == 8 or obstacle == 9:
+            random_spawn = random.randrange(3)
+            bird_spawn = (SCREEN_HEIGHT / 40) + (random_spawn * SCREEN_HEIGHT / 6 )
+            ennemies.append(Ennemies(ennemie_image_bird, SCREEN_WIDTH, bird_spawn))
 
       # Déplacement du background en fonction du delta time 
       background.update(self.dt)
+
+      # Déplacement des ennemies 
+      for ennemie in ennemies: 
+        ennemie.posX -= self.dt * speed_level
+        if ennemie.posX < (- SCREEN_WIDTH) :
+          ennemies.pop(ennemies.index(ennemie))
+        if pygame.Rect.colliderect(ennemie.rect, self.player.rect) == True:
+            pygame.quit() 
 
       # Spawn des obstacles et des consommables
       for obstacle in obstacles:
         obstacle.posX -= self.dt * speed_level 
         if obstacle.posX < ( - SCREEN_WIDTH) :
           obstacles.pop(obstacles.index(obstacle))
-
+        
         # gestions des collisions pour tous les obstacles / consommables
-        if pygame.Rect.colliderect(obstacle.rect, player.rect) == True :
+        if pygame.Rect.colliderect(obstacle.rect, self.player.rect) == True :
           # Si c'est un objet mortel alors fin de la partie
           if obstacle.collide == True :
             pygame.quit()
+          
           
           # Si c'est un objet commestible, le joueur le prend dans sa bouche
           elif obstacle.collide == False and len(self.objectInMouse) == 0:
             self.objectInMouse.append(obstacle)
             obstacles.pop(obstacles.index(obstacle))
+
+
         
-        # Teste des collisions en cas de recrachage de l'objet 
+        # Teste des collisions en cas de recrachage de l'objet OU de collision au spawn
         for obstaclee in obstacles: 
           if pygame.Rect.colliderect(obstacle.rect, obstaclee.rect) == True and obstaclee != obstacle:
-            print("aaaa")
             obstacles.pop(obstacles.index(obstaclee))
+            for ennemie in ennemies: 
+              if pygame.Rect.colliderect(obstaclee.rect, ennemie.rect) == True:
+                obstacles.pop(obstacles.index(obstaclee))
+
           for objects in objectsCaught:
             if pygame.Rect.colliderect(objects.rect, obstaclee.rect) == True and obstaclee.collide == False:
-              print("bbbb")
               objectsCaught.pop(objectsCaught.index(objects))
               obstacles.pop(obstacles.index(obstaclee))
+            for ennemie in ennemies: 
+              if pygame.Rect.colliderect(objects.rect, ennemie.rect) == True:
+                objectsCaught.pop(objectsCaught.index(objects))
+                ennemies.pop(ennemies.index(ennemie))
+            
+
 
       # Mécanique d'avaler/recracher et de changement de difficulté
       if len(self.objectInMouse) == 1:
@@ -130,7 +152,7 @@ class Game:
           elif keyPlayer[pygame.K_RSHIFT] :
             objectsCaught.append(objects)
             self.objectInMouse.pop(self.objectInMouse.index(objects))
-            objects.posY = player.y
+            objects.posY = self.player.y
 
       # Boucle pour changer la vitesse du joueur en fonction de ce qu'il avale --> à revoir
       for objects in objectsCaught: 
@@ -140,14 +162,9 @@ class Game:
           
       # Contrôle du joueur
       keyPlayer = pygame.key.get_pressed()
-      for player in players:
-        if keyPlayer[pygame.K_UP] and self.player.rect.y > 0:
-          self.move_y -= self.player.speed * self.dt
-        if keyPlayer[pygame.K_DOWN] and self.player.rect.y < (SCREEN_HEIGHT - 218):
-          self.move_y += self.player.speed * self.dt
-      
-
-      # Animation du Blobby (idle)
-      self.animation(player_image_good, self.current_player_image, self.dt, self.move_y)
+      if keyPlayer[pygame.K_UP] and self.player.rect.y > 0:
+        self.player.y -= self.player.speed * self.dt
+      if keyPlayer[pygame.K_DOWN] and self.player.rect.y < (SCREEN_HEIGHT - player_height * 2):
+        self.player.y += self.player.speed * self.dt
 
       pygame.display.update()

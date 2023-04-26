@@ -21,7 +21,7 @@ event2 = pygame.USEREVENT+2
 pygame.time.set_timer(event1, 100)
 pygame.time.set_timer(event2, 3000)
 
-pygame.time.set_timer(event2, random.randrange(500, 800)) # Will trigger every 2 - 3.5 seconds
+pygame.time.set_timer(event2, random.randrange(500, 800)) 
 
 
 # ------- LOAD IMG --------
@@ -30,19 +30,25 @@ bg1_image = pygame.image.load("img/layer 1.png").convert()
 bg1_width = bg1_image.get_width()
 bg1_height = bg1_image.get_height()
 bg1_ratio = bg1_width/bg1_height
+bg1_width = SCREEN_HEIGHT * bg1_ratio
+bg1_height = SCREEN_HEIGHT 
 bg1_image = pygame.transform.scale(bg1_image, ((SCREEN_HEIGHT * bg1_ratio), SCREEN_HEIGHT))
 
 bg2_image = pygame.image.load("img/layer 2.png").convert_alpha()
 bg2_width = bg2_image.get_width()
 bg2_height = bg2_image.get_height()
 bg2_ratio = bg2_width/bg2_height
+bg2_width = SCREEN_HEIGHT * bg2_ratio
+bg2_height = SCREEN_HEIGHT 
 bg2_image = pygame.transform.scale(bg2_image, ((SCREEN_HEIGHT * bg2_ratio), SCREEN_HEIGHT))
 
 bg3_image = pygame.image.load("img/layer 3.png").convert_alpha()
 bg3_width = bg3_image.get_width()
 bg3_height = bg3_image.get_height()
 bg3_ratio = bg3_width/bg3_height
-bg3_image = pygame.transform.scale(bg3_image, ((SCREEN_HEIGHT * bg3_ratio), SCREEN_HEIGHT))
+bg3_width = SCREEN_HEIGHT * bg3_ratio / 10
+bg3_height = SCREEN_HEIGHT / 10
+bg3_image = pygame.transform.scale(bg3_image, ((SCREEN_HEIGHT * bg3_ratio) / 8, SCREEN_HEIGHT / 8))
 
 
 # Blobby : définition de la taille du joueur dans la scène
@@ -61,6 +67,17 @@ player_image_good.append(pygame.transform.scale(pygame.image.load("img/blobby/bl
 player_image_good.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_good_4.png").convert_alpha(), (player_width, player_height)))
 player_image_good.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_good_5.png").convert_alpha(), (player_width, player_height)))
 
+# animation
+player_image_good_anim = []
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 1.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 2.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 3.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 4.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 5.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 6.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 7.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 8.png").convert_alpha(), (player_width, player_height)))
+player_image_good_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 9.png").convert_alpha(), (player_width, player_height)))
         
         
 # blobby bad
@@ -69,9 +86,20 @@ player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blo
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_2.png").convert_alpha(), (player_width, player_height)))
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_3.png").convert_alpha(), (player_width, player_height)))
 player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_4.png").convert_alpha(), (player_width, player_height)))
-player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_good_5.png").convert_alpha(), (player_width, player_height)))
+player_image_bad.append(pygame.transform.scale(pygame.image.load("img/blobby/blobby_bad_5.png").convert_alpha(), (player_width, player_height)))
 
-
+# animation
+player_image_bad_anim = []
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 1.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 2.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 3.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 4.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 5.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 6.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 7.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby bad anim 8.png").convert_alpha(), (player_width, player_height)))
+player_image_bad_anim.append(pygame.transform.scale(pygame.image.load("img/blobby_feature/blobby good anim 9.png").convert_alpha(), (player_width, player_height)))
+   
 
 # fixed object
 building_image = pygame.image.load("img/batiment 1.png").convert_alpha()
@@ -107,3 +135,21 @@ consumable_carrot_ratio = consumable_carrot_width/consumable_carrot_height
 consumable_carrot_width = SCREEN_HEIGHT/8 * consumable_carrot_ratio
 consumable_carrot_height = SCREEN_HEIGHT/8
 consumable_carrot_img = pygame.transform.scale(consumable_carrot_img, (consumable_carrot_width, consumable_carrot_height))
+
+# Ennemies
+image_bird_type = pygame.image.load("img/ennemies/bird_1.png").convert_alpha()
+bird_width = image_bird_type.get_width()
+bird_height = image_bird_type.get_height()
+bird_ratio = bird_width/bird_height
+bird_width = SCREEN_HEIGHT/6 * bird_ratio
+bird_height = SCREEN_HEIGHT/6
+
+
+ennemie_image_bird = []
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_1.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_2.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_3.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_4.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_5.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_6.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_7.png").convert_alpha(), (bird_width, bird_height)))
