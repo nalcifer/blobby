@@ -3,7 +3,7 @@ from config.screen import *
 pygame.font.init()
 
 
-#affiche le scoredurant la partie
+#affiche le score durant la partie
 def Score(font, score):
     my_text = font.render('Score = '+ str(score), True, 'Black')
     screen.blit(my_text, (0,0))
@@ -11,9 +11,13 @@ def Score(font, score):
 
 #affiche une fenetre en fin de partie avec le score et permettant de rejouer ou de quitter
 def EndScore(font52,font100, score, best):
+    #création de l'image
     bg1_image = pygame.image.load("img/ecran_mort.png").convert()
+    #remeusure de la surface de l'image
     back = pygame.transform.scale(bg1_image, (SCREEN_WIDTH, SCREEN_HEIGHT) )
+    #affichage du fond
     screen.blit(back, (0,0))
+    #affichage des texte
     highscore = font52.render( "HIGHSCORE :" , True, 'yellow')
     screen.blit(highscore, (50,0))
     bestscore1 = font52.render( str(best[0]) +" : " + str(best[1]) , True, 'red')
@@ -22,16 +26,22 @@ def EndScore(font52,font100, score, best):
     screen.blit(bestscore2, (50,100))
     bestscore3 = font52.render( str(best[4]) +" : " + str(best[5]), True, 'orange')
     screen.blit(bestscore3, (50,150))
+    leave = font52.render( "QUIT (Q)", True, 'yellow')
+    screen.blit(leave, (1250,SCREEN_HEIGHT/1.1))
+    restart = font52.render( "RESTART (R)", True, 'yellow')
+    screen.blit(restart, (50,SCREEN_HEIGHT/1.1))
 
     my_text = font100.render( "Your Score -> " + str(score), True, 'yellow')
     screen.blit(my_text,(SCREEN_WIDTH/5, SCREEN_HEIGHT/1.5))
     for event in pygame.event.get():
         keyPlayer = pygame.key.get_pressed() 
         if keyPlayer[pygame.K_r] :
+            #vide les éléments en jeu pour recommencer la partie si on appuie sur r
             ennemies.clear()
             obstacles.clear()
             objectsCaught.clear()
             return True
         if keyPlayer[pygame.K_q] :
+            #arrete la partie si on appuie sur q
             return False
     pygame.display.flip()
