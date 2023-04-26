@@ -60,7 +60,7 @@ class Game:
       else: 
         self.anime_eat = False
       redrawWindow(background, self.player, self.dt, self.player_level, self.anime_eat)
-
+      screen.blit(pollution_image[self.player_level], (SCREEN_WIDTH / 2 - 0.5 * pollution_level_witdh,   pollution_level_height))
 
       # Boucle de gestion des evenements
       for event in pygame.event.get():
@@ -163,8 +163,6 @@ class Game:
               self.player_level -= 1
               self.objectInMouse.pop(self.objectInMouse.index(objects))
 
-            elif objects.good == True:
-              self.objectInMouse.pop(self.objectInMouse.index(objects))
 
           # Recracher
           elif keyPlayer[pygame.K_RSHIFT] :

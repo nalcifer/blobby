@@ -153,3 +153,21 @@ ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies
 ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_5.png").convert_alpha(), (bird_width, bird_height)))
 ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_6.png").convert_alpha(), (bird_width, bird_height)))
 ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_7.png").convert_alpha(), (bird_width, bird_height)))
+
+
+# pollution level
+pollution_image_type = pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha()
+pollution_level_witdh = pollution_image_type.get_width()
+pollution_level_height = pollution_image_type.get_height()
+pollution_level_ratio = pollution_level_witdh / pollution_level_height
+pollution_level_witdh = SCREEN_HEIGHT * pollution_level_ratio / 20
+pollution_level_height = SCREEN_HEIGHT / 20
+
+pollution_image = []
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
