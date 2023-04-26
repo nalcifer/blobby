@@ -164,10 +164,12 @@ pollution_level_witdh = SCREEN_HEIGHT * pollution_level_ratio / 20
 pollution_level_height = SCREEN_HEIGHT / 20
 
 pollution_image = []
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_1.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_2.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_3.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
 pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
-pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
-pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
-pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
-pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
-pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
-pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_4.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_5.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_6.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_7.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_8.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
+pollution_image.append(pygame.transform.scale(pygame.image.load("img/pollution/pollution_level_9.png").convert_alpha(), (pollution_level_witdh, pollution_level_height)))
