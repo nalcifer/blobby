@@ -32,6 +32,9 @@ class Game:
     self.player_level = 4
     self.move_y = player_height
     self.number_sprite = 0
+    self.pollution_score = 0
+    self.position = [100, 100]
+    self.speed = 5
 
     # Variables pour avaler recracher
     self.objectInMouse = []
@@ -48,12 +51,21 @@ class Game:
       self.player.initPlayer()
       time += deltatime
 
-
+  
   # Fonction pour la boucle principale
   def run(self):
     while self.running:
       # config.screen
       redrawWindow(background)
+
+      # afficher le score 
+      # police d'ecriture 
+      font = pygame.font.SysFont(None, 20)
+      # texte à génerer 
+      text = font.render("Niveau de Pollution: " + str(self.pollution_score), True, (255, 255, 255))
+      # superpose le texte sur l'écran
+      screen.blit(text, (10, 10))
+
 
       # Boucle pour calculer le delta time (temps entre deux frames)
       # self.clock.tick(FPS)
@@ -70,7 +82,6 @@ class Game:
           pygame.quit()
           run = False
 
-
         # events défini dans : config.config
         # boucle pour définir le spawn aléatoire de batiments et de consommables
         if event.type == event2:
@@ -83,7 +94,7 @@ class Game:
             obstacles.append(Object(consumable_carrot_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_carrot_height * 2),  collide = False, good = False)) 
           if obstacle == 3:
             obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 3*SCREEN_HEIGHT/11, collide = True, good = False))
-
+    
       # Déplacement du background en fonction du delta time 
       background.update(self.dt)
 
@@ -122,9 +133,11 @@ class Game:
           if keyPlayer[pygame.K_SPACE]:
             if objects.good == False:
               self.objectInMouse.pop(self.objectInMouse.index(objects))
-              
+              Player.avale_carotte(self)
+
             elif objects.good == True:
               self.objectInMouse.pop(self.objectInMouse.index(objects))
+              Player.avale_soda(self)
 
           # Recracher
           elif keyPlayer[pygame.K_RSHIFT] :

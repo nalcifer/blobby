@@ -15,3 +15,4 @@ if run == True:
   game.run() # Debut de la boucle de jeu 
 
 pygame.quit() # Quitter le jeu
+ 
