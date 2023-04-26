@@ -30,19 +30,25 @@ bg1_image = pygame.image.load("img/layer 1.png").convert()
 bg1_width = bg1_image.get_width()
 bg1_height = bg1_image.get_height()
 bg1_ratio = bg1_width/bg1_height
+bg1_width = SCREEN_HEIGHT * bg1_ratio
+bg1_height = SCREEN_HEIGHT 
 bg1_image = pygame.transform.scale(bg1_image, ((SCREEN_HEIGHT * bg1_ratio), SCREEN_HEIGHT))
 
 bg2_image = pygame.image.load("img/layer 2.png").convert_alpha()
 bg2_width = bg2_image.get_width()
 bg2_height = bg2_image.get_height()
 bg2_ratio = bg2_width/bg2_height
+bg2_width = SCREEN_HEIGHT * bg2_ratio
+bg2_height = SCREEN_HEIGHT 
 bg2_image = pygame.transform.scale(bg2_image, ((SCREEN_HEIGHT * bg2_ratio), SCREEN_HEIGHT))
 
 bg3_image = pygame.image.load("img/layer 3.png").convert_alpha()
 bg3_width = bg3_image.get_width()
 bg3_height = bg3_image.get_height()
 bg3_ratio = bg3_width/bg3_height
-bg3_image = pygame.transform.scale(bg3_image, ((SCREEN_HEIGHT * bg3_ratio), SCREEN_HEIGHT))
+bg3_width = SCREEN_HEIGHT * bg3_ratio / 10
+bg3_height = SCREEN_HEIGHT / 10
+bg3_image = pygame.transform.scale(bg3_image, ((SCREEN_HEIGHT * bg3_ratio) / 8, SCREEN_HEIGHT / 8))
 
 
 # Blobby : définition de la taille du joueur dans la scène

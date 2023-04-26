@@ -73,18 +73,19 @@ class Game:
         # events défini dans : config.config
         # boucle pour définir le spawn aléatoire de batiments et de consommables
         if event.type == event2:
-          obstacle = random.randrange(0,8)
+          obstacle = random.randrange(0,20)
           if obstacle == 0:
-            obstacles.append(Object(building_image ,SCREEN_WIDTH, 6*SCREEN_HEIGHT/14, collide = True, good = False))
-          elif obstacle == 1:
+            obstacles.append(Object(building_image ,SCREEN_WIDTH, 5*SCREEN_HEIGHT/11, collide = True, good = False))
+          elif obstacle <= 3 and obstacle > 0:
             obstacles.append(Object(consumable_soda_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_soda_height * 2), collide = False, good = True))
-          elif obstacle == 2:
+          elif obstacle <= 6 and obstacle > 3:
             obstacles.append(Object(consumable_carrot_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_carrot_height * 2),  collide = False, good = False)) 
-          elif obstacle == 3:
-            obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 3*SCREEN_HEIGHT/11, collide = True, good = False))
-          elif obstacle == 4:
-            # print("sheeeeeeeeeeeesh")
-            ennemies.append(Ennemies(ennemie_image_bird, SCREEN_WIDTH, (SCREEN_HEIGHT / 40)))
+          elif obstacle == 7:
+            obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 1*SCREEN_HEIGHT/3, collide = True, good = False))
+          elif obstacle == 8 or obstacle == 9:
+            random_spawn = random.randrange(3)
+            bird_spawn = (SCREEN_HEIGHT / 40) + (random_spawn * SCREEN_HEIGHT / 6 )
+            ennemies.append(Ennemies(ennemie_image_bird, SCREEN_WIDTH, bird_spawn))
 
       # Déplacement du background en fonction du delta time 
       background.update(self.dt)
@@ -95,7 +96,6 @@ class Game:
         if ennemie.posX < (- SCREEN_WIDTH) :
           ennemies.pop(ennemies.index(ennemie))
         if pygame.Rect.colliderect(ennemie.rect, self.player.rect) == True:
-            print("aaaaa")
             pygame.quit() 
 
       # Spawn des obstacles et des consommables
@@ -121,21 +121,17 @@ class Game:
         # Teste des collisions en cas de recrachage de l'objet OU de collision au spawn
         for obstaclee in obstacles: 
           if pygame.Rect.colliderect(obstacle.rect, obstaclee.rect) == True and obstaclee != obstacle:
-            # print("aaaa")
             obstacles.pop(obstacles.index(obstaclee))
             for ennemie in ennemies: 
               if pygame.Rect.colliderect(obstaclee.rect, ennemie.rect) == True:
-                print("aaaaa")
                 obstacles.pop(obstacles.index(obstaclee))
 
           for objects in objectsCaught:
             if pygame.Rect.colliderect(objects.rect, obstaclee.rect) == True and obstaclee.collide == False:
-              # print("bbbb")
               objectsCaught.pop(objectsCaught.index(objects))
               obstacles.pop(obstacles.index(obstaclee))
             for ennemie in ennemies: 
               if pygame.Rect.colliderect(objects.rect, ennemie.rect) == True:
-                print("aaaaa")
                 objectsCaught.pop(objectsCaught.index(objects))
                 ennemies.pop(ennemies.index(ennemie))
             
