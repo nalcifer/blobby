@@ -17,12 +17,13 @@ font100 = pygame.font.Font('font\MCKLB___.ttf', 100)
 # -------- EVENT ----------
 event1 = pygame.USEREVENT+1
 event2 = pygame.USEREVENT+2
+event3 = pygame.USEREVENT+3
 
 pygame.time.set_timer(event1, 100)
 pygame.time.set_timer(event2, 3000)
+pygame.time.set_timer(event3, 30000)
 
 pygame.time.set_timer(event2, random.randrange(500, 800)) 
-
 
 # ------- LOAD IMG --------
 # background
