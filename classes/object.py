@@ -15,7 +15,7 @@ class Object:
         self.collide = collide
         self.good = good
 
-    # Fonction qui dessine les objets
+    # Fonction qui dessine les objets avec collisions
     def draw(self):
         screen.blit(self.img, (self.posX, self.posY))
         self.rect = self.img.get_rect(x = self.posX, y = self.posY)

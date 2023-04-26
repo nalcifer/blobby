@@ -80,7 +80,7 @@ class Game:
             obstacles.append(Object(consumable_soda_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_soda_height * 2), collide = False, good = True))
           elif obstacle <= 6 and obstacle > 3:
             obstacles.append(Object(consumable_carrot_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_carrot_height * 2),  collide = False, good = False)) 
-          elif obstacle == 7 or obstacle <15:
+          elif obstacle == 7 :
             obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 1*SCREEN_HEIGHT/3, collide = True, good = False, height = 200, width = 200))
           elif obstacle == 8 or obstacle == 9:
             random_spawn = random.randrange(3)
