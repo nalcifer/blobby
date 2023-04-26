@@ -12,13 +12,16 @@ pygame.display.set_icon(icon)
 
 
 # Redessinage des éléments de la fenetre 
+ennemies = []
 obstacles = []
 objectsCaught = []
 def redrawWindow(bg, player, dt, level, eat):
-    print(eat)
     bg.drawBg()
     for objectCaught in objectsCaught:
         objectCaught.draw()
     for obstacle in obstacles:
         obstacle.draw()
+    for ennemie in ennemies:
+        print("here")
+        ennemie.draw(dt)
     player.draw(dt, level, eat)

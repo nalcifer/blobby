@@ -129,3 +129,21 @@ consumable_carrot_ratio = consumable_carrot_width/consumable_carrot_height
 consumable_carrot_width = SCREEN_HEIGHT/8 * consumable_carrot_ratio
 consumable_carrot_height = SCREEN_HEIGHT/8
 consumable_carrot_img = pygame.transform.scale(consumable_carrot_img, (consumable_carrot_width, consumable_carrot_height))
+
+# Ennemies
+image_bird_type = pygame.image.load("img/ennemies/bird_1.png").convert_alpha()
+bird_width = image_bird_type.get_width()
+bird_height = image_bird_type.get_height()
+bird_ratio = bird_width/bird_height
+bird_width = SCREEN_HEIGHT/6 * bird_ratio
+bird_height = SCREEN_HEIGHT/6
+
+
+ennemie_image_bird = []
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_1.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_2.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_3.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_4.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_5.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_6.png").convert_alpha(), (bird_width, bird_height)))
+ennemie_image_bird.append(pygame.transform.scale(pygame.image.load("img/ennemies/bird_7.png").convert_alpha(), (bird_width, bird_height)))

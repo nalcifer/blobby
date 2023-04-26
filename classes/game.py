@@ -5,6 +5,7 @@ from classes.background import *
 from classes.object import *
 from config.config import *
 from pages.home import *
+from classes.ennemies import *
 
 
 
@@ -51,12 +52,13 @@ class Game:
       # print("fps:" + str(1/self.dt))
       self.prev_time = self.now
 
-      print(len(self.objectInMouse))
+
+      # config.screen
+      # Redessine les objets de la scene
       if len(self.objectInMouse) != 0:
         self.anime_eat = True
       else: 
         self.anime_eat = False
-      # config.screen
       redrawWindow(background, self.player, self.dt, self.player_level, self.anime_eat)
 
 
@@ -78,11 +80,20 @@ class Game:
             obstacles.append(Object(consumable_soda_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_soda_height * 2), collide = False, good = True))
           elif obstacle == 2:
             obstacles.append(Object(consumable_carrot_img ,SCREEN_WIDTH, random.randrange(100000) % (SCREEN_HEIGHT - consumable_carrot_height * 2),  collide = False, good = False)) 
-          if obstacle == 3:
+          elif obstacle == 3:
             obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 3*SCREEN_HEIGHT/11, collide = True, good = False))
+          elif obstacle == 4:
+            # print("sheeeeeeeeeeeesh")
+            ennemies.append(Ennemies(ennemie_image_bird, SCREEN_WIDTH, (SCREEN_HEIGHT / 8)))
 
       # Déplacement du background en fonction du delta time 
       background.update(self.dt)
+
+      # Dépplacement des ennemies 
+      for ennemie in ennemies: 
+        ennemie.posX -= self.dt * speed_level
+        if ennemie.posX < (- SCREEN_WIDTH) :
+          ennemies.pop(ennemies.index(ennemie))
 
       # Spawn des obstacles et des consommables
       for obstacle in obstacles:
@@ -105,11 +116,11 @@ class Game:
         # Teste des collisions en cas de recrachage de l'objet 
         for obstaclee in obstacles: 
           if pygame.Rect.colliderect(obstacle.rect, obstaclee.rect) == True and obstaclee != obstacle:
-            print("aaaa")
+            # print("aaaa")
             obstacles.pop(obstacles.index(obstaclee))
           for objects in objectsCaught:
             if pygame.Rect.colliderect(objects.rect, obstaclee.rect) == True and obstaclee.collide == False:
-              print("bbbb")
+              # print("bbbb")
               objectsCaught.pop(objectsCaught.index(objects))
               obstacles.pop(obstacles.index(obstaclee))
 
