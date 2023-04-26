@@ -1,5 +1,6 @@
 import pygame
 from config.screen import *
+from config.config import *
 pygame.font.init()
 # affiche une fenetre pour lancer le jeu
 def home(font):
@@ -9,11 +10,14 @@ def home(font):
     run = False
     while run == False:
         #on initialise my_text avec le rendu de la font importé en jaune avec le text press to start
-        my_text = font.render('PRESS SPACE TO START ', True, 'yellow')
+        my_text = font.render('APPUYEZ SUR ESPACE', True, 'yellow')
         my_text_width = my_text.get_width()
         my_text_height = my_text.get_height()
         #on affiche my_text au coordonées données
-        screen.blit(my_text, (SCREEN_WIDTH/2 - 0.5 * my_text_width, SCREEN_HEIGHT/2 - 0.5 * my_text_height))
+        
+        screen.blit(menu_image, (0, 0))
+        screen.blit(my_text, (SCREEN_WIDTH/2 - 0.5 * my_text_width, 3 * SCREEN_HEIGHT/5 - 0.5 * my_text_height))
+        
         # pour tout évenement pygame qui se déclenche
         for event in pygame.event.get():
             # on initialise keyP avec l'évenement une touche à été pressé
@@ -31,7 +35,6 @@ def home(font):
             if event.type == pygame.QUIT:
                 run = True
         pygame.display.flip()
-
 
 
 

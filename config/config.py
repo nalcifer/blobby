@@ -51,6 +51,14 @@ bg3_width = SCREEN_HEIGHT * bg3_ratio / 10
 bg3_height = SCREEN_HEIGHT / 10
 bg3_image = pygame.transform.scale(bg3_image, ((SCREEN_HEIGHT * bg3_ratio) / 8, SCREEN_HEIGHT / 8))
 
+# Menu
+menu_image = pygame.image.load("img/page_menu.png").convert_alpha()
+menu_width = menu_image.get_width()
+menu_height = menu_image.get_height()
+menu_ratio = menu_width/menu_height
+menu_width = SCREEN_HEIGHT * menu_ratio
+menu_height = SCREEN_HEIGHT
+menu_image = pygame.transform.scale(menu_image, (menu_width, menu_height))
 
 # Blobby : définition de la taille du joueur dans la scène
 image_player_type = pygame.image.load("img/blobby/blobby_bad_1.png").convert_alpha()
