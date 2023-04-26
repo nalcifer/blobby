@@ -10,8 +10,10 @@ def home(font):
     while run == False:
         #on initialise my_text avec le rendu de la font importé en jaune avec le text press to start
         my_text = font.render('PRESS SPACE TO START ', True, 'yellow')
+        my_text_width = my_text.get_width()
+        my_text_height = my_text.get_height()
         #on affiche my_text au coordonées données
-        screen.blit(my_text, (SCREEN_WIDTH/15, SCREEN_HEIGHT/1.5))
+        screen.blit(my_text, (SCREEN_WIDTH/2 - 0.5 * my_text_width, SCREEN_HEIGHT/2 - 0.5 * my_text_height))
         # pour tout évenement pygame qui se déclenche
         for event in pygame.event.get():
             # on initialise keyP avec l'évenement une touche à été pressé
@@ -26,7 +28,6 @@ def home(font):
                 if pygame.joystick.Joystick(0).get_button(0):
                     run = True
                     return run
-                #quitter
             if event.type == pygame.QUIT:
                 run = True
         pygame.display.flip()
@@ -35,6 +36,3 @@ def home(font):
 
 
 
-
-
-        # Je sais pas : Dorian si tu pouvais mettre des commentaires explicatifs stp :) (oui j'essayerais d'en mettre)
