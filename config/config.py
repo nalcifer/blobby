@@ -11,8 +11,8 @@ pygame.joystick.init()
 joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_count())]
 # Initialisation de la police
 pygame.font.init()
-font = pygame.font.Font('font\SedgwickAveDisplay-Regular.ttf', 52)
-
+font52 = pygame.font.Font('font\MCKLB___.ttf', 52)
+font100 = pygame.font.Font('font\MCKLB___.ttf', 100)
 
 # -------- EVENT ----------
 event1 = pygame.USEREVENT+1
