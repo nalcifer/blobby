@@ -84,45 +84,62 @@ class Game:
             obstacles.append(Object(building_image_two ,SCREEN_WIDTH, 3*SCREEN_HEIGHT/11, collide = True, good = False))
           elif obstacle == 4:
             # print("sheeeeeeeeeeeesh")
-            ennemies.append(Ennemies(ennemie_image_bird, SCREEN_WIDTH, (SCREEN_HEIGHT / 8)))
+            ennemies.append(Ennemies(ennemie_image_bird, SCREEN_WIDTH, (SCREEN_HEIGHT / 40)))
 
       # Déplacement du background en fonction du delta time 
       background.update(self.dt)
 
-      # Dépplacement des ennemies 
+      # Déplacement des ennemies 
       for ennemie in ennemies: 
         ennemie.posX -= self.dt * speed_level
         if ennemie.posX < (- SCREEN_WIDTH) :
           ennemies.pop(ennemies.index(ennemie))
+        if pygame.Rect.colliderect(ennemie.rect, self.player.rect) == True:
+            print("aaaaa")
+            pygame.quit() 
 
       # Spawn des obstacles et des consommables
       for obstacle in obstacles:
         obstacle.posX -= self.dt * speed_level 
         if obstacle.posX < ( - SCREEN_WIDTH) :
           obstacles.pop(obstacles.index(obstacle))
-
+        
         # gestions des collisions pour tous les obstacles / consommables
         if pygame.Rect.colliderect(obstacle.rect, self.player.rect) == True :
           # Si c'est un objet mortel alors fin de la partie
           if obstacle.collide == True :
             pygame.quit()
           
+          
           # Si c'est un objet commestible, le joueur le prend dans sa bouche
           elif obstacle.collide == False and len(self.objectInMouse) == 0:
             self.objectInMouse.append(obstacle)
             obstacles.pop(obstacles.index(obstacle))
 
+
         
-        # Teste des collisions en cas de recrachage de l'objet 
+        # Teste des collisions en cas de recrachage de l'objet OU de collision au spawn
         for obstaclee in obstacles: 
           if pygame.Rect.colliderect(obstacle.rect, obstaclee.rect) == True and obstaclee != obstacle:
             # print("aaaa")
             obstacles.pop(obstacles.index(obstaclee))
+            for ennemie in ennemies: 
+              if pygame.Rect.colliderect(obstaclee.rect, ennemie.rect) == True:
+                print("aaaaa")
+                obstacles.pop(obstacles.index(obstaclee))
+
           for objects in objectsCaught:
             if pygame.Rect.colliderect(objects.rect, obstaclee.rect) == True and obstaclee.collide == False:
               # print("bbbb")
               objectsCaught.pop(objectsCaught.index(objects))
               obstacles.pop(obstacles.index(obstaclee))
+            for ennemie in ennemies: 
+              if pygame.Rect.colliderect(objects.rect, ennemie.rect) == True:
+                print("aaaaa")
+                objectsCaught.pop(objectsCaught.index(objects))
+                ennemies.pop(ennemies.index(ennemie))
+            
+
 
       # Mécanique d'avaler/recracher et de changement de difficulté
       if len(self.objectInMouse) == 1:
