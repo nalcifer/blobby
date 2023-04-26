@@ -142,9 +142,27 @@ class Game:
         for objects in self.objectInMouse:
           # Avaler
           if keyPlayer[pygame.K_SPACE]:
-            if objects.good == False:
+            if objects.good == True and self.player_level < 7 and self.player_level != 0:
+              self.player_level += 1
+              self.player.speed *= 1.5
               self.objectInMouse.pop(self.objectInMouse.index(objects))
-              
+            elif objects.good == True and self.player_level == 7:
+              self.player_level += 1
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
+            elif objects.good == True and self.player_level == 1:
+              self.player_level += 1
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
+            if objects.good == False and self.player_level > 1 and self.player_level != 7:
+              self.player_level -= 1 
+              self.player.speed /= 1.5
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
+            elif objects.good == False and self.player_level == 1:
+              self.player_level -= 1
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
+            elif objects.good == False and self.player_level == 7:
+              self.player_level -= 1
+              self.objectInMouse.pop(self.objectInMouse.index(objects))
+
             elif objects.good == True:
               self.objectInMouse.pop(self.objectInMouse.index(objects))
 
