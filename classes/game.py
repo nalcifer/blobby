@@ -39,6 +39,8 @@ class Game:
     # Variables pour avaler recracher
     self.objectInMouse = []
     self.lenObjectInMouse = len(self.objectInMouse)
+
+    self.speed_level = speed_level
       
 
   # Fonction pour la boucle principale
@@ -87,12 +89,25 @@ class Game:
             bird_spawn = (SCREEN_HEIGHT / 40) + (random_spawn * SCREEN_HEIGHT / 6 )
             ennemies.append(Ennemies(ennemie_image_bird, SCREEN_WIDTH, bird_spawn))
 
+        if event.type == event3:
+          background.speed += 50
+          self.player.speed +=50
+          self.speed_level += 20
+          if background.speed == 1050:
+            background.speed -= 50
+          if self.player.speed == 1300:
+            self.player.speed -= 50
+          if self.speed_level == 420:
+            self.speed_level -= 20
+          background.update(self.dt)
+          print(background.speed)
+
       # Déplacement du background en fonction du delta time 
       background.update(self.dt)
 
       # Déplacement des ennemies 
       for ennemie in ennemies: 
-        ennemie.posX -= self.dt * speed_level
+        ennemie.posX -= self.dt * self.speed_level
         if ennemie.posX < (- SCREEN_WIDTH) :
           ennemies.pop(ennemies.index(ennemie))
         if pygame.Rect.colliderect(ennemie.rect, self.player.rect) == True:
@@ -100,7 +115,7 @@ class Game:
 
       # Spawn des obstacles et des consommables
       for obstacle in obstacles:
-        obstacle.posX -= self.dt * speed_level 
+        obstacle.posX -= self.dt * self.speed_level 
         if obstacle.posX < ( - SCREEN_WIDTH) :
           obstacles.pop(obstacles.index(obstacle))
         
